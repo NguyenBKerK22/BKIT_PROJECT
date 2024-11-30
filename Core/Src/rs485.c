@@ -44,7 +44,7 @@ Modbus_Status Modbus_Receive(Modbus_HandleTypeDef* hModbus){ //Thieu timeout
 void Modbus_CallBack(Modbus_HandleTypeDef* hModbus, UART_HandleTypeDef* huart, uint16_t Size){
 	HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_4);
 	if(huart->Instance == hModbus->huart->Instance){
-		Receive_Flag = 1;
+		Receive_Flag = Modbus_CheckData(hModbus);
 		hModbus->Rx_size = Size;
 		HAL_UART_Transmit(&huart1, hModbus->Rx_buf, hModbus->Rx_size, HAL_MAX_DELAY);
 		HAL_UARTEx_ReceiveToIdle_IT(hModbus->huart, hModbus->Rx_buf, MAX_SIZE);
