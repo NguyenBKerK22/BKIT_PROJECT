@@ -1,0 +1,5 @@
+../Core/Src/Master.c:17:6:parserFrame	2
+../Core/Src/Master.c:36:6:User_interface	10
+../Core/Src/Master.c:101:6:Master_Run	11
+../Core/Src/Master.c:158:7:Master_get_temperature	2
+../Core/Src/Master.c:165:7:Master_get_humid	2
