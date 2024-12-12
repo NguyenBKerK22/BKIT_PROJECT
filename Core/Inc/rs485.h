@@ -38,6 +38,7 @@ typedef struct{
 	uint16_t Tx_size;
 	uint8_t Rx_buf[256];
 	uint16_t Rx_size;
+	unsigned char RxFlag;
 
 }Modbus_HandleTypeDef;
 extern Modbus_HandleTypeDef Master;

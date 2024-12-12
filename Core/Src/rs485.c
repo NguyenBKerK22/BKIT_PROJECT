@@ -12,7 +12,15 @@ static void Modbus_Send(Modbus_HandleTypeDef* hModbus){
 		HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_4);
 	}
 	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_15,RESET);
+	uint16_t start = HAL_GetTick();
+	while(!hModbus->RxFlag){
+		if(HAL_GetTick() - start == timeout){
+			return MODBUS_TIMEOUT;
+		}
+	}
 	HAL_Delay(5);
+	hModbus->RxFlag = 0;
+	return MODBUS_OKE;
 }
 unsigned char Modbus_CheckData(Modbus_HandleTypeDef* hModbus){
 	uint16_t rx_crc = crc16(hModbus->Rx_buf, hModbus->Rx_size - 2);
@@ -36,6 +44,7 @@ Modbus_Status Modbus_Transmit(Modbus_HandleTypeDef* hModbus, uint8_t Address, ui
 	Modbus_Send(hModbus);
 	return MODBUS_OKE;
 }
+
 Modbus_Status Modbus_Receive(Modbus_HandleTypeDef* hModbus){ //Thieu timeout
 	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_15,RESET);
 	HAL_UARTEx_ReceiveToIdle_IT(hModbus->huart, hModbus->Rx_buf, MAX_SIZE);
@@ -46,6 +55,7 @@ void Modbus_CallBack(Modbus_HandleTypeDef* hModbus, UART_HandleTypeDef* huart, u
 	if(huart->Instance == hModbus->huart->Instance){
 		Receive_Flag = Modbus_CheckData(hModbus);
 		hModbus->Rx_size = Size;
+		hModbus->RxFlag = 1;
 		HAL_UART_Transmit(&huart1, hModbus->Rx_buf, hModbus->Rx_size, HAL_MAX_DELAY);
 		HAL_UARTEx_ReceiveToIdle_IT(hModbus->huart, hModbus->Rx_buf, MAX_SIZE);
 	}
