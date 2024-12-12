@@ -2,4 +2,4 @@
 ../Core/Src/main.c:141:6:SystemClock_Config	3
 ../Core/Src/main.c:185:6:TestADC	2
 ../Core/Src/main.c:203:6:lcd_run	1
-../Core/Src/main.c:215:6:Error_Handler	1
+../Core/Src/main.c:221:6:Error_Handler	1

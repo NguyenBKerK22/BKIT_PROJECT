@@ -41,10 +41,11 @@ void User_interface(){
 		case SEND_MANUAL:
 			if(isPress(0)){
 				User_behavior = SEND_PERIOD;
+				break;
 			}
 			if(isPress(1)){ // READ TEMPERATURE
 				uint8_t data[4] = {0x00,TEMPERATURE_REGISTER_ADDRESS,0x00,0x01};
-				Modbus_PrepareData(&Master, SLAVE_ADDRESS, 0x03, data, 4);
+				Modbus_PrepareData(&Master, SLAVE_ADDRESS, READ_HOLDING_REGISTER, data, 4);
 				Modbus_Transmit(&Master, 5000);
 				Master_behavior = PROCESSING_REPLY;
 //				Modbus_Send(&Master);
@@ -53,8 +54,8 @@ void User_interface(){
 //				Master_behavior = WAIT_FOR_REPLY;
 			}
 			if(isPress(2)){ // READ HUMID
-				uint8_t data[4] = {0x00,HUMIDLITY_REGISTER_ADDRESS,0x00,0x01};
-				Modbus_PrepareData(&Master, SLAVE_ADDRESS, 0x03, data, 4);
+				uint8_t data[4] = {0x00,CURRENT_REGISTER_ADDRESS,0x00,0x01};
+				Modbus_PrepareData(&Master, SLAVE_ADDRESS, READ_HOLDING_REGISTER, data, 4);
 				Modbus_Transmit(&Master, 5000);
 				Master_behavior = PROCESSING_REPLY;
 //				Modbus_Send(&Master);
@@ -62,9 +63,29 @@ void User_interface(){
 //				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_15,RESET);
 //				Master_behavior = WAIT_FOR_REPLY;
 			}
-			if(isPress(3)){ // READ TEMPERATURE AND HUMID
-				uint8_t data[4] = {0x00,0x00,0x00,0x02};
-				Modbus_PrepareData(&Master, SLAVE_ADDRESS, 0x03, data, 4);
+			if(isPress(3)){ // READ HUMID
+				uint8_t data[4] = {0x00,VOLTAGE_REGISTER_ADDRESS,0x00,0x01};
+				Modbus_PrepareData(&Master, SLAVE_ADDRESS, READ_HOLDING_REGISTER, data, 4);
+				Modbus_Transmit(&Master, 5000);
+				Master_behavior = PROCESSING_REPLY;
+			//				Modbus_Send(&Master);
+			//				HAL_Delay(5);
+			//				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_15,RESET);
+			//				Master_behavior = WAIT_FOR_REPLY;
+						}
+			if(isPress(4)){ // READ HUMID
+				uint8_t data[4] = {0x00,LIGHT_REGISTER_ADDRESS,0x00,0x01};
+				Modbus_PrepareData(&Master, SLAVE_ADDRESS, READ_HOLDING_REGISTER, data, 4);
+				Modbus_Transmit(&Master, 5000);
+				Master_behavior = PROCESSING_REPLY;
+			//	Modbus_Send(&Master);
+			//	HAL_Delay(5);
+			//	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_15,RESET);
+			//	Master_behavior = WAIT_FOR_REPLY;
+						}
+			if(isPress(5)){ // READ TEMPERATURE AND HUMID
+				uint8_t data[4] = {0x00,POTENTIOMETER_REGISTER_ADDRESS,0x00,0x01};
+				Modbus_PrepareData(&Master, SLAVE_ADDRESS, READ_HOLDING_REGISTER, data, 4);
 				Modbus_Transmit(&Master, 5000);
 				Master_behavior = PROCESSING_REPLY;
 //				Modbus_Send(&Master);
@@ -72,19 +93,50 @@ void User_interface(){
 //				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_15,RESET);
 //				Master_behavior = WAIT_FOR_REPLY;
 			}
-			if(isPress(4)){// WRITE SINGLE COIL
-
+			if(isPress(6)){// READ MULTIPLE HOLDING REGISTER
+				uint8_t data[4] = {0x00,TEMPERATURE_REGISTER_ADDRESS,0x00,0x05};
+				Modbus_PrepareData(&Master, SLAVE_ADDRESS, READ_HOLDING_REGISTER, data, 4);
+				Modbus_Transmit(&Master, 5000);
+				Master_behavior = PROCESSING_REPLY;
 			}
-			if(isPress(5)){// WRITE SINGLE HOLDING REGISTER
 
+			if(isPress(7)){// WRITE SINGLE HOLDING REGISTER
+				uint8_t data[4] = {0x00,TEMPERATURE_REGISTER_ADDRESS,0x00,0x01};
+				Modbus_PrepareData(&Master, SLAVE_ADDRESS, WRITE_SINGLE_HOLDING_REGISTER, data, 4);
+				Modbus_Transmit(&Master, 5000);
+				Master_behavior = PROCESSING_REPLY;
+			}
+			if(isPress(8)){// WRITE SINGLE HOLDING REGISTER
+				uint8_t data[4] = {0x00,CURRENT_REGISTER_ADDRESS,0x00,0x01};
+				Modbus_PrepareData(&Master, SLAVE_ADDRESS, WRITE_SINGLE_HOLDING_REGISTER, data, 4);
+				Modbus_Transmit(&Master, 5000);
+				Master_behavior = PROCESSING_REPLY;
+			}
+			if(isPress(9)){// WRITE SINGLE HOLDING REGISTER
+				uint8_t data[4] = {0x00,VOLTAGE_REGISTER_ADDRESS,0x00,0x01};
+				Modbus_PrepareData(&Master, SLAVE_ADDRESS, WRITE_SINGLE_HOLDING_REGISTER, data, 4);
+				Modbus_Transmit(&Master, 5000);
+				Master_behavior = PROCESSING_REPLY;
+			}
+			if(isPress(10)){// WRITE SINGLE HOLDING REGISTER
+				uint8_t data[4] = {0x00,LIGHT_REGISTER_ADDRESS,0x00,0x01};
+				Modbus_PrepareData(&Master, SLAVE_ADDRESS, WRITE_SINGLE_HOLDING_REGISTER, data, 4);
+				Modbus_Transmit(&Master, 5000);
+				Master_behavior = PROCESSING_REPLY;
+			}
+			if(isPress(11)){// WRITE SINGLE HOLDING REGISTER
+				uint8_t data[4] = {0x00,POTENTIOMETER_REGISTER_ADDRESS,0x00,0x01};
+				Modbus_PrepareData(&Master, SLAVE_ADDRESS, WRITE_SINGLE_HOLDING_REGISTER, data, 4);
+				Modbus_Transmit(&Master, 5000);
+				Master_behavior = PROCESSING_REPLY;
 			}
 			break;
 		case SEND_PERIOD:
 			if(isPress(0)){
 				User_behavior = SEND_MANUAL;
 			}
-			//if(timer4_flag){
-				//timer4_flag = 0;
+			if(timer4_flag){
+				timer4_flag = 0;
 				Modbus_PrepareData(&Master, SLAVE_ADDRESS, 0x03, data_manual, 4);
 				Modbus_Transmit(&Master, 5000);
 				Master_behavior = PROCESSING_REPLY;
@@ -92,7 +144,7 @@ void User_interface(){
 //				HAL_Delay(5);
 //				HAL_GPIO_WritePin(GPIOA,GPIO_PIN_15,RESET);
 //				Master_behavior = WAIT_FOR_REPLY;
-			//}
+			}
 			break;
 		default:
 			break;
@@ -128,7 +180,6 @@ void Master_Run(Modbus_HandleTypeDef* hModbus){
 							for(int i=0;i<num_bytes;i++){
 								Holding_Register[i + address * SizeOfReg]  = hModbus->Rx_buf[i+3];
 							}
-//							HAL_UART_Transmit(&huart1, Holding_Register, 10, HAL_MAX_DELAY);
 							break;
 						case WRITE_MULTIPLE_HOLDING_REGISTER:
 							break;
@@ -162,10 +213,31 @@ float Master_get_temperature(){
 	}
 	return (float)res/10;
 }
-float Master_get_humid(){
+float Master_get_current(){
 	uint16_t res = 0;
 	for(int i = 0; i < SizeOfReg; i++){
-		res = (res<<8)|(Holding_Register[HUMIDLITY_REGISTER_ADDRESS*SizeOfReg + i]);
+		res = (res<<8)|(Holding_Register[CURRENT_REGISTER_ADDRESS*SizeOfReg + i]);
 	}
 	return (float)res/10;
+}
+float Master_get_voltage(){
+	uint16_t res = 0;
+	for(int i = 0; i < SizeOfReg; i++){
+		res = (res<<8)|(Holding_Register[VOLTAGE_REGISTER_ADDRESS*SizeOfReg + i]);
+	}
+	return (float)res/10;
+}
+uint16_t Master_get_light(){
+	uint16_t res = 0;
+	for(int i = 0; i < SizeOfReg; i++){
+		res = (res<<8)|(Holding_Register[LIGHT_REGISTER_ADDRESS*SizeOfReg + i]);
+	}
+	return res/10;
+}
+uint16_t Master_get_potention(){
+	uint16_t res = 0;
+	for(int i = 0; i < SizeOfReg; i++){
+		res = (res<<8)|(Holding_Register[POTENTIOMETER_REGISTER_ADDRESS*SizeOfReg + i]);
+	}
+	return res/10;
 }

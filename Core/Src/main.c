@@ -113,7 +113,7 @@ int main(void)
   timer2_init();
   timer2_set(50);
   timer4_init();
-  timer4_set(2000);
+  timer4_set(500);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -201,10 +201,16 @@ void TestADC() {
 	}
 }
 void lcd_run(){
-	lcd_show_string(10, 140, "Temperature:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 140, Master_get_temperature(), 4, RED, BLACK, 16);
-	lcd_show_string(10, 160, "Humid:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 160, Master_get_humid(), 4, RED, BLACK, 16);
+	lcd_show_string(10, 100, "Temperature:", RED, BLACK, 16, 0);
+	lcd_show_float_num(130, 100, Master_get_temperature(), 4, RED, BLACK, 16);
+	lcd_show_string(10, 120, "Current:", RED, BLACK, 16, 0);
+	lcd_show_float_num(130, 120, Master_get_current(), 4, RED, BLACK, 16);
+	lcd_show_string(10, 140, "Voltage:", RED, BLACK, 16, 0);
+	lcd_show_float_num(130, 140, Master_get_voltage(), 4, RED, BLACK, 16);
+	lcd_show_string(10, 160, "Light:", RED, BLACK, 16, 0);
+	lcd_show_int_num(130, 160, Master_get_light(), 4, RED, BLACK, 16);
+	lcd_show_string(10, 180, "Potentiometer:", RED, BLACK, 16, 0);
+	lcd_show_int_num(130, 180, Master_get_potention(), 4, RED, BLACK,16);
 }
 /* USER CODE END 4 */
 

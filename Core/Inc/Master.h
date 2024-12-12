@@ -13,8 +13,12 @@
 #define WAIT_FOR_REPLY 0x01
 #define PROCESSING_REPLY 0x02
 #define PROCESSING_ERROR 0x03
-#define TEMPERATURE_REGISTER_ADDRESS 0x01
-#define HUMIDLITY_REGISTER_ADDRESS 0x00
+
+#define TEMPERATURE_REGISTER_ADDRESS 0
+#define LIGHT_REGISTER_ADDRESS 2
+#define CURRENT_REGISTER_ADDRESS 4
+#define VOLTAGE_REGISTER_ADDRESS 6
+#define POTENTIOMETER_REGISTER_ADDRESS 8
 
 extern uint8_t address;
 extern uint8_t function;
@@ -29,5 +33,8 @@ void parserFrame(uint8_t *pFrame, uint8_t FrameSize, uint8_t *Address, uint8_t *
 void Master_Run(Modbus_HandleTypeDef* hModbus);
 void User_interface();
 float Master_get_temperature();
-float Master_get_humid();
+float Master_get_current();
+float Master_get_voltage();
+uint16_t Master_get_light();
+uint16_t Master_get_potention();
 #endif /* INC_MASTER_H_ */
