@@ -25,11 +25,11 @@ extern UART_HandleTypeDef huart3;
 
 #define RS_485_TIMER 1000
 #define RS_485_TIM 1000
-void f_rs485_init_def(uint8_t* tx_buf, uint8_t tx_size, uint8_t* rx_buf);
-void f_rs485_send_cmd_def(uint8_t* tx_buf, uint8_t tx_size);
-void f_rs485_fsm_def();
-void f_rs485_parserFrame_def(uint8_t *pFrame, uint8_t FrameSize, uint8_t *Address, uint8_t *Function, uint8_t *Data, uint8_t *Datasize, uint16_t *Crc);
-int f_rs485_received_def();
+void f_rs485_init(uint8_t* tx_buf, uint8_t tx_size, uint8_t* rx_buf);
+void f_rs485_send_cmd(uint8_t* tx_buf, uint8_t tx_size);
+void f_rs485_fsm();
+void f_rs485_parserFrame(uint8_t *pFrame, uint8_t FrameSize, uint8_t *Address, uint8_t *Function, uint8_t *Data, uint8_t *Datasize, uint16_t *Crc);
+int f_rs485_received();
 typedef struct{
 	UART_HandleTypeDef* huart;
 	uint8_t address;
