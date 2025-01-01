@@ -7,7 +7,7 @@
 #include "user.h"
 enum user_behavior_t _user_state = INIT;
 uint8_t led_7seg_colon_index = 0;
-void f_user_interface_def(){
+void f_user_interface(){
 	switch(_user_state){
 		case INIT:
 			user_state = SEND_MANUAL;

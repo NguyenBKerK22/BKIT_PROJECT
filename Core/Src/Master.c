@@ -6,7 +6,7 @@
  */
 #include "master.h"
 enum master_state_t _master_behavior = IDLE;
-void f_master_fsm_def(){
+void f_master_fsm(){
 	switch(_master_behavior){
 		case IDLE:
 			if(send_cmd_flag){
@@ -59,7 +59,7 @@ void f_master_fsm_def(){
 					default:
 						break;
 				}
-				f_rs485_send_cmd_def(master.tx_buf, master.tx_size);
+				f_rs485_send_cmd(master.tx_buf, master.tx_size);
 				if(cmd_send == BROAD_CAST){
 					setTimer(TI_MASTER_TURN_ARROUND_TIMER, TI_MASTER_TURN_ARROUND_TIME);
 					_master_behavior = WAITING_TURN_ARROUND_DELAY;
@@ -74,19 +74,19 @@ void f_master_fsm_def(){
 			break;
 		case WAITING_FOR_REPLY:
 			if(isFlag(TI_MASTER_TURN_ARROUND_TIME)) _master_behavior = PROCESSING_ERROR;
-			else if(f_rs485_received_def()){
+			else if(f_rs485_received()){
 				_master_behavior = PROCESSING_REPLY;
 			}
 			break;
 		case PROCESSING_REPLY:
-			uint8_t _address_def;
-			uint8_t _function_def;
-			uint8_t _data_def[256];
-			uint8_t _data_size_def;
-			uint16_t _crc_receive_def;
-			f_rs485_parserFrame_def(master.rx_buf, master.rx_size, &_address_def, &_function_def, _data_def,&_data_size_def, &_crc_receive_def);
-			if(_crc_receive_def == crc16(master.rx_buf, master.rx_size - 2)){
-					switch(_function_def){
+			uint8_t _address;
+			uint8_t _function;
+			uint8_t _data[256];
+			uint8_t _data_size;
+			uint16_t _crc_receive;
+			f_rs485_parserFrame(master.rx_buf, master.rx_size, &_address, &_function, _data,&_data_size, &_crc_receive);
+			if(_crc_receive == crc16(master.rx_buf, master.rx_size - 2)){
+					switch(_function){
 					case READ_HOLDING_REGISTER:
 						uint8_t _num_bytes = master.rx_buf[2];
 						uint16_t _address = (((uint16_t)master.tx_buf[2]<<8)|(master.tx_buf[3]));
@@ -108,7 +108,7 @@ void f_master_fsm_def(){
 			}
 			break;
 		case PROCESSING_ERROR:
-			f_rs485_send_cmd_def(master.tx_buf, master.tx_size);
+			f_rs485_send_cmd(master.tx_buf, master.tx_size);
 			if(cmd_send == BROAD_CAST){
 				setTimer(TI_MASTER_TURN_ARROUND_TIMER, TI_MASTER_TURN_ARROUND_TIME);
 				_master_behavior = WAITING_TURN_ARROUND_DELAY;
@@ -121,28 +121,28 @@ void f_master_fsm_def(){
 			break;
 	}
 }
-float f_master_get_temperature_def(){
+float f_master_get_temperature(){
 	return *((float*)((master.holding_register + TEMPERATURE_REGISTER_ADDRESS)));
 }
-float f_master_get_current_def(){
+float f_master_get_current(){
 	return *((float*)((master.holding_register + CURRENT_REGISTER_ADDRESS)));;
 }
-float f_master_get_voltage_def(){
+float f_master_get_voltage(){
 	return *((float*)((master.holding_register + VOLTAGE_REGISTER_ADDRESS)));
 }
-uint16_t f_master_get_light_def(){
-	uint16_t _return_val_def = 0;
-	uint8_t _size_of_reg_def = 2;
-	for(int i = 0; i < _size_of_reg_def; i++){
-		_return_val_def = (_return_val_def<<8)|(master.holding_register[LIGHT_REGISTER_ADDRESS + i]);
+uint16_t f_master_get_light(){
+	uint16_t _return_val = 0;
+	uint8_t _size_of_reg = 2;
+	for(int i = 0; i < _size_of_reg; i++){
+		_return_val = (_return_val<<8)|(master.holding_register[LIGHT_REGISTER_ADDRESS + i]);
 	}
-	return _return_val_def;
+	return _return_val;
 }
-uint16_t f_master_get_potention_def(){
-	uint16_t _return_val_def = 0;
-	uint8_t _size_of_reg_def = 2;
-	for(int i = 0; i < _size_of_reg_def; i++){
-		_return_val_def = (_return_val_def<<8)|(master.holding_register[POTENTIOMETER_REGISTER_ADDRESS + i]);
+uint16_t f_master_get_potention(){
+	uint16_t _return_val = 0;
+	uint8_t _size_of_reg = 2;
+	for(int i = 0; i < _size_of_reg; i++){
+		_return_val = (_return_val<<8)|(master.holding_register[POTENTIOMETER_REGISTER_ADDRESS + i]);
 	}
-	return _return_val_def;
+	return _return_val;
 }

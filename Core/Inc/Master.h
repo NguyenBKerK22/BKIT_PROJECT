@@ -29,11 +29,11 @@ enum master_state_t{
 	PROCESSING_ERROR
 };
 extern modbus_handle_typedef_t master;
-float f_master_get_temperature_def();
-float f_master_get_current_def();
-float f_master_get_voltage_def();
-uint16_t f_master_get_light_def();
-uint16_t f_master_get_potention_def();
-void f_rs485_parserFrame_def(uint8_t *pFrame, uint8_t FrameSize, uint8_t *Address, uint8_t *Function, uint8_t *Data, uint8_t *Datasize, uint16_t *Crc);
-void f_master_fsm_def();
+float f_master_get_temperature();
+float f_master_get_current();
+float f_master_get_voltage();
+uint16_t f_master_get_light();
+uint16_t f_master_get_potention();
+void f_rs485_parserFrame(uint8_t *pFrame, uint8_t FrameSize, uint8_t *Address, uint8_t *Function, uint8_t *Data, uint8_t *Datasize, uint16_t *Crc);
+void f_master_fsm();
 #endif /* INC_MASTER_H_ */

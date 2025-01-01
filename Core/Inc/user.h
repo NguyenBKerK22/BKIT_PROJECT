@@ -17,5 +17,5 @@ enum user_behavior_t{
 	SEND_PERIOD,
 };
 extern uint8_t led_7seg_colon_index;
-void f_user_interface_def();
+void f_user_interface();
 #endif /* INC_USER_H_ */
