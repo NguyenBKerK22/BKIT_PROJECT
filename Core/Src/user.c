@@ -5,10 +5,10 @@
  *      Author: ADMIN
  */
 #include "user.h"
-enum user_behavior_t _user_state = INIT;
+enum user_behavior_t user_state = INIT;
 uint8_t led_7seg_colon_index = 0;
 void f_user_interface(){
-	switch(_user_state){
+	switch(user_state){
 		case INIT:
 			user_state = SEND_MANUAL;
 			break;
@@ -63,7 +63,7 @@ void f_user_interface(){
 			if(isPress(10)){
 				cmd_send = WRITE_LIGHT;
 			}
-			if(cmd_send != 0x00) send_cmd_flag = 1;
+			if(cmd_send != 0x00) flag_send_cmd = 1;
 			break;
 		case SEND_PERIOD:
 			break;

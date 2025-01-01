@@ -19,12 +19,6 @@ extern UART_HandleTypeDef huart3;
 #define WRITE_SINGLE_HOLDING_REGISTER 0x06
 #define WRITE_MULTIPLE_COIL 0x0F
 #define WRITE_MULTIPLE_HOLDING_REGISTER 0x10
-/*
- * CHANGE TIMER
- */
-
-#define RS_485_TIMER 1000
-#define RS_485_TIM 1000
 void f_rs485_init(uint8_t* tx_buf, uint8_t tx_size, uint8_t* rx_buf);
 void f_rs485_send_cmd(uint8_t* tx_buf, uint8_t tx_size);
 void f_rs485_fsm();

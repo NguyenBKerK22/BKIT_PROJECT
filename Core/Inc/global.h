@@ -14,8 +14,12 @@
 #define TI_BUTTON_SCAN_TIME 20
 #define TI_7SEG_SCAN_TIMER 1
 #define TI_7SEG_SCAN_TIME 2
-#define TI_MODBUS_PERIOD_TIMER 2
-#define TI_MODBUS_PERIOD_TIME 1000
+#define TI_RS_485_TIMER 1000
+#define TI_RS_485_TIM 1000
+#define TI_MASTER_TURN_ARROUND_TIMER 5
+#define TI_MASTER_TURN_ARROUND_TIME 50
+#define TI_MASTER_WAITING_TIMER 6
+#define TI_MASTER_WAITING_TIME 100
 
 #define READ_TEMPERATURE 0x01
 #define READ_CURRENT 0x02
@@ -32,5 +36,5 @@
 
 extern uint8_t slave_address;
 extern uint8_t cmd_send;
-extern uint8_t send_cmd_flag;
+extern uint8_t flag_send_cmd;
 #endif /* INC_GLOBAL_H_ */

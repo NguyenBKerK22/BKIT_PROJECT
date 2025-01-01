@@ -5,56 +5,76 @@
  *      Author: ADMIN
  */
 #include "master.h"
-enum master_state_t _master_behavior = IDLE;
+enum master_state_t master_behavior = IDLE;
+void _f_master_send_cmd_temperature(){
+	master.tx_buf[0] = slave_address;
+	master.tx_buf[1] = READ_HOLDING_REGISTER;
+	master.tx_buf[2] = 0x00;
+	master.tx_buf[3] = TEMPERATURE_REGISTER_ADDRESS;
+	master.tx_buf[4] = 0x00;
+	master.tx_buf[5] = 0x01;
+	master.tx_size = 6;
+}
+
+void _f_master_send_cmd_current(){
+	master.tx_buf[0] = slave_address;
+	master.tx_buf[1] = READ_HOLDING_REGISTER;
+	master.tx_buf[2] = 0x00;
+	master.tx_buf[3] = CURRENT_REGISTER_ADDRESS;
+	master.tx_buf[4] = 0x00;
+	master.tx_buf[5] = 0x01;
+	master.tx_size = 6;
+}
+
+void _f_master_send_cmd_voltage(){
+	master.tx_buf[0] = slave_address;
+	master.tx_buf[1] = READ_HOLDING_REGISTER;
+	master.tx_buf[2] = 0x00;
+	master.tx_buf[3] = VOLTAGE_REGISTER_ADDRESS;
+	master.tx_buf[4] = 0x00;
+	master.tx_buf[5] = 0x01;
+	master.tx_size = 6;
+}
+
+void _f_master_send_cmd_light(){
+	master.tx_buf[0] = slave_address;
+	master.tx_buf[1] = READ_HOLDING_REGISTER;
+	master.tx_buf[2] = 0x00;
+	master.tx_buf[3] = LIGHT_REGISTER_ADDRESS;
+	master.tx_buf[4] = 0x00;
+	master.tx_buf[5] = 0x01;
+	master.tx_size = 6;
+}
+
+void _f_master_send_cmd_potentiometer(){
+	master.tx_buf[0] = slave_address;
+	master.tx_buf[1] = READ_HOLDING_REGISTER;
+	master.tx_buf[2] = 0x00;
+	master.tx_buf[3] = POTENTIOMETER_REGISTER_ADDRESS;
+	master.tx_buf[4] = 0x00;
+	master.tx_buf[5] = 0x01;
+	master.tx_size = 6;
+}
+
 void f_master_fsm(){
-	switch(_master_behavior){
+	switch(master_behavior){
 		case IDLE:
-			if(send_cmd_flag){
+			if(flag_send_cmd){
 				switch(cmd_send){
 					case READ_TEMPERATURE:
-						master.tx_buf[0] = slave_address;
-						master.tx_buf[1] = READ_HOLDING_REGISTER;
-						master.tx_buf[2] = 0x00;
-						master.tx_buf[3] = TEMPERATURE_REGISTER_ADDRESS;
-						master.tx_buf[4] = 0x00;
-						master.tx_buf[5] = 0x01;
-						master.tx_size = 6;
+						_f_master_send_cmd_temperature();
 						break;
 					case READ_CURRENT:
-						master.tx_buf[0] = slave_address;
-						master.tx_buf[1] = READ_HOLDING_REGISTER;
-						master.tx_buf[2] = 0x00;
-						master.tx_buf[3] = CURRENT_REGISTER_ADDRESS;
-						master.tx_buf[4] = 0x00;
-						master.tx_buf[5] = 0x01;
-						master.tx_size = 6;
+						_f_master_send_cmd_current();
 						break;
 					case READ_VOLTAGE:
-						master.tx_buf[0] = slave_address;
-						master.tx_buf[1] = READ_HOLDING_REGISTER;
-						master.tx_buf[2] = 0x00;
-						master.tx_buf[3] = VOLTAGE_REGISTER_ADDRESS;
-						master.tx_buf[4] = 0x00;
-						master.tx_buf[5] = 0x01;
-						master.tx_size = 6;
+						_f_master_send_cmd_voltage();
 						break;
 					case READ_LIGHT:
-						master.tx_buf[0] = slave_address;
-						master.tx_buf[1] = READ_HOLDING_REGISTER;
-						master.tx_buf[2] = 0x00;
-						master.tx_buf[3] = LIGHT_REGISTER_ADDRESS;
-						master.tx_buf[4] = 0x00;
-						master.tx_buf[5] = 0x01;
-						master.tx_size = 6;
+						_f_master_send_cmd_light();
 						break;
 					case READ_POTENTION:
-						master.tx_buf[0] = slave_address;
-						master.tx_buf[1] = READ_HOLDING_REGISTER;
-						master.tx_buf[2] = 0x00;
-						master.tx_buf[3] = POTENTIOMETER_REGISTER_ADDRESS;
-						master.tx_buf[4] = 0x00;
-						master.tx_buf[5] = 0x01;
-						master.tx_size = 6;
+						_f_master_send_cmd_potentiometer();
 						break;
 					default:
 						break;
@@ -62,20 +82,20 @@ void f_master_fsm(){
 				f_rs485_send_cmd(master.tx_buf, master.tx_size);
 				if(cmd_send == BROAD_CAST){
 					setTimer(TI_MASTER_TURN_ARROUND_TIMER, TI_MASTER_TURN_ARROUND_TIME);
-					_master_behavior = WAITING_TURN_ARROUND_DELAY;
+					master_behavior = WAITING_TURN_ARROUND_DELAY;
 					break;
 				}
 				setTimer(TI_MASTER_WAITING_TIMER, TI_MASTER_TURN_ARROUND_TIME);
-				_master_behavior = WAITING_FOR_REPLY;
+				master_behavior = WAITING_FOR_REPLY;
 			}
 			break;
 		case WAITING_TURN_ARROUND_DELAY:
-			if(isFlag(TI_MASTER_TURN_ARROUND_TIMER)) _master_behavior = IDLE;
+			if(isFlag(TI_MASTER_TURN_ARROUND_TIMER)) master_behavior = IDLE;
 			break;
 		case WAITING_FOR_REPLY:
-			if(isFlag(TI_MASTER_TURN_ARROUND_TIME)) _master_behavior = PROCESSING_ERROR;
+			if(isFlag(TI_MASTER_TURN_ARROUND_TIME)) master_behavior = PROCESSING_ERROR;
 			else if(f_rs485_received()){
-				_master_behavior = PROCESSING_REPLY;
+				master_behavior = PROCESSING_REPLY;
 			}
 			break;
 		case PROCESSING_REPLY:
@@ -101,35 +121,39 @@ void f_master_fsm(){
 					default:
 						break;
 					}
-				_master_behavior = PROCESSING_ERROR;
+				master_behavior = PROCESSING_ERROR;
 			}
 			else{
-				_master_behavior = PROCESSING_ERROR;
+				master_behavior = PROCESSING_ERROR;
 			}
 			break;
 		case PROCESSING_ERROR:
 			f_rs485_send_cmd(master.tx_buf, master.tx_size);
 			if(cmd_send == BROAD_CAST){
 				setTimer(TI_MASTER_TURN_ARROUND_TIMER, TI_MASTER_TURN_ARROUND_TIME);
-				_master_behavior = WAITING_TURN_ARROUND_DELAY;
+				master_behavior = WAITING_TURN_ARROUND_DELAY;
 				break;
 			}
 			setTimer(TI_MASTER_WAITING_TIMER, TI_MASTER_TURN_ARROUND_TIME);
-			_master_behavior = WAITING_FOR_REPLY;
+			master_behavior = WAITING_FOR_REPLY;
 			break;
 		default:
 			break;
 	}
 }
+
 float f_master_get_temperature(){
 	return *((float*)((master.holding_register + TEMPERATURE_REGISTER_ADDRESS)));
 }
+
 float f_master_get_current(){
 	return *((float*)((master.holding_register + CURRENT_REGISTER_ADDRESS)));;
 }
+
 float f_master_get_voltage(){
 	return *((float*)((master.holding_register + VOLTAGE_REGISTER_ADDRESS)));
 }
+
 uint16_t f_master_get_light(){
 	uint16_t _return_val = 0;
 	uint8_t _size_of_reg = 2;
@@ -138,6 +162,7 @@ uint16_t f_master_get_light(){
 	}
 	return _return_val;
 }
+
 uint16_t f_master_get_potention(){
 	uint16_t _return_val = 0;
 	uint8_t _size_of_reg = 2;
