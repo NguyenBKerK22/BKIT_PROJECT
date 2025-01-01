@@ -5,7 +5,7 @@
  *      Author: ADMIN
  */
 #include "master.h"
-enum MASTER_STATE _master_behavior = IDLE;
+enum master_state_t _master_behavior = IDLE;
 void f_master_fsm_def(){
 	switch(_master_behavior){
 		case IDLE:

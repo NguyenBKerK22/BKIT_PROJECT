@@ -51,7 +51,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-Modbus_HandleTypeDef master;
+modbus_handle_typedef_t master;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/

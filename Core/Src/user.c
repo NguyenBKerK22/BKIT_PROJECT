@@ -5,10 +5,10 @@
  *      Author: ADMIN
  */
 #include "user.h"
-enum USER_BEHAVIOR user_state = INIT;
+enum user_behavior_t _user_state = INIT;
 uint8_t led_7seg_colon_index = 0;
 void f_user_interface_def(){
-	switch(user_state){
+	switch(_user_state){
 		case INIT:
 			user_state = SEND_MANUAL;
 			break;

@@ -38,5 +38,5 @@ typedef struct{
 	uint8_t rx_buf[256];
 	uint16_t rx_size;
 	uint8_t holding_register[18];
-}Modbus_HandleTypeDef;
+}modbus_handle_typedef_t;
 #endif /* INC_RS485_H_ */

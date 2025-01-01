@@ -21,14 +21,14 @@
 #define TI_MASTER_TURN_ARROUND_TIME 50
 #define TI_MASTER_WAITING_TIMER 6
 #define TI_MASTER_WAITING_TIME 100
-enum MASTER_STATE{
+enum master_state_t{
 	IDLE,
 	WAITING_TURN_ARROUND_DELAY,
 	WAITING_FOR_REPLY,
 	PROCESSING_REPLY,
 	PROCESSING_ERROR
 };
-extern Modbus_HandleTypeDef master;
+extern modbus_handle_typedef_t master;
 float f_master_get_temperature_def();
 float f_master_get_current_def();
 float f_master_get_voltage_def();
