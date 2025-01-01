@@ -1,5 +1,0 @@
-../Core/Src/software_timer.c:31:6:timer2_init	8	static
-../Core/Src/software_timer.c:34:6:timer4_init	8	static
-../Core/Src/software_timer.c:43:6:timer2_set	16	static
-../Core/Src/software_timer.c:49:6:timer4_set	16	static
-../Core/Src/software_timer.c:61:6:HAL_TIM_PeriodElapsedCallback	16	static

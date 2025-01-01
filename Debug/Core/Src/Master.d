@@ -1,4 +1,4 @@
-Core/Src/Master.o: ../Core/Src/Master.c ../Core/Inc/Master.h \
+Core/Src/master.o: ../Core/Src/master.c ../Core/Inc/master.h \
  ../Core/Inc/rs485.h ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
@@ -34,8 +34,8 @@ Core/Src/Master.o: ../Core/Src/Master.c ../Core/Inc/Master.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/button.h ../Core/Inc/crc16.h ../Core/Inc/software_timer.h
-../Core/Inc/Master.h:
+ ../Core/Inc/crc16.h ../Core/Inc/global.h ../Core/Inc/timer.h
+../Core/Inc/master.h:
 ../Core/Inc/rs485.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -72,6 +72,6 @@ Core/Src/Master.o: ../Core/Src/Master.c ../Core/Inc/Master.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
-../Core/Inc/button.h:
 ../Core/Inc/crc16.h:
-../Core/Inc/software_timer.h:
+../Core/Inc/global.h:
+../Core/Inc/timer.h:

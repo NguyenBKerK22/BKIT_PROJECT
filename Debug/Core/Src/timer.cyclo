@@ -1,0 +1,4 @@
+../Core/Src/timer.c:13:6:setTimer	1
+../Core/Src/timer.c:19:6:timerRun	4
+../Core/Src/timer.c:34:5:isFlag	2
+../Core/Src/timer.c:43:5:msToTick	1

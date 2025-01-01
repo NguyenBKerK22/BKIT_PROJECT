@@ -45,6 +45,7 @@ uint16_t crc16_lookup_table[256] = {
 
 uint16_t crc16(const uint8_t *data, uint16_t num_bytes)
 {
+
     uint16_t crc = 0xFFFF;
     const uint8_t *ptr = data;
 

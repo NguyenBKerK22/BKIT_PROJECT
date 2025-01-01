@@ -7,7 +7,7 @@
 
 /* Includes */
 #include "stdint.h"
-
+#include "global.h"
 /* Variables */
 extern uint16_t button_count[16];
 

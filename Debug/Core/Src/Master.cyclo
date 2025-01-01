@@ -1,8 +1,6 @@
-../Core/Src/Master.c:17:6:parserFrame	2
-../Core/Src/Master.c:36:6:User_interface	19
-../Core/Src/Master.c:153:6:Master_Run	11
-../Core/Src/Master.c:209:7:Master_get_temperature	2
-../Core/Src/Master.c:216:7:Master_get_current	2
-../Core/Src/Master.c:223:7:Master_get_voltage	2
-../Core/Src/Master.c:230:10:Master_get_light	2
-../Core/Src/Master.c:237:10:Master_get_potention	2
+../Core/Src/master.c:9:6:f_master_fsm_def	22
+../Core/Src/master.c:124:7:f_master_get_temperature_def	1
+../Core/Src/master.c:127:7:f_master_get_current_def	1
+../Core/Src/master.c:130:7:f_master_get_voltage_def	1
+../Core/Src/master.c:133:10:f_master_get_light_def	2
+../Core/Src/master.c:141:10:f_master_get_potention_def	2

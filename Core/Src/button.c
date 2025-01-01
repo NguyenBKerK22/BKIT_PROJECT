@@ -82,7 +82,7 @@ void button_scan() {
 
 				if (button_count3[i] == 1) // PRESSED
 				{
-					timeOutForPress[i] = TIME_OUT_FOR_LONG_PRESS ;
+					timeOutForPress[i] = TIME_OUT_FOR_LONG_PRESS / TI_BUTTON_SCAN_TIME;
 					isPressed[i] = 1;
 				}
 			}
@@ -91,7 +91,7 @@ void button_scan() {
 				timeOutForPress[i]--;
 				if (timeOutForPress[i] <= 0)
 				{
-					timeOutForPress[i] = TIME_OUT_FOR_LONG_PRESS;
+					timeOutForPress[i] = TIME_OUT_FOR_LONG_PRESS / TI_BUTTON_SCAN_TIME;
 					if (button_count3[i] == 1) // PRESSED
 					{
 						isLongPressed[i] = 1;
