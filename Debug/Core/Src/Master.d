@@ -1,4 +1,4 @@
-Core/Src/master.o: ../Core/Src/master.c ../Core/Inc/master.h \
+Core/Src/Master.o: ../Core/Src/Master.c ../Core/Inc/master.h \
  ../Core/Inc/rs485.h ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \

@@ -141,9 +141,9 @@ int main(void)
 		  setTimer(TI_7SEG_SCAN_TIMER, TI_7SEG_SCAN_TIME);
 	  }
 	  lcd_run();
-	  f_user_interface_def();
-	  f_rs485_fsm_def();
-	  f_master_fsm_def();
+	  f_user_interface();
+	  f_rs485_fsm();
+	  f_master_fsm();
   }
   /* USER CODE END 3 */
 }
@@ -216,15 +216,15 @@ void TestADC() {
 }
 void lcd_run(){
 	lcd_show_string(10, 100, "Temperature:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 100, f_master_get_temperature_def(), 4, RED, BLACK, 16);
+	lcd_show_float_num(130, 100, f_master_get_temperature(), 4, RED, BLACK, 16);
 	lcd_show_string(10, 120, "Current:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 120, f_master_get_current_def(), 4, RED, BLACK, 16);
+	lcd_show_float_num(130, 120, f_master_get_current(), 4, RED, BLACK, 16);
 	lcd_show_string(10, 140, "Voltage:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 140, f_master_get_voltage_def(), 4, RED, BLACK, 16);
+	lcd_show_float_num(130, 140, f_master_get_voltage(), 4, RED, BLACK, 16);
 	lcd_show_string(10, 160, "Light:", RED, BLACK, 16, 0);
-	lcd_show_int_num(130, 160, f_master_get_light_def(), 4, RED, BLACK, 16);
+	lcd_show_int_num(130, 160, f_master_get_light(), 4, RED, BLACK, 16);
 	lcd_show_string(10, 180, "Potentiometer:", RED, BLACK, 16, 0);
-	lcd_show_int_num(130, 180, f_master_get_potention_def(), 4, RED, BLACK,16);
+	lcd_show_int_num(130, 180, f_master_get_potention(), 4, RED, BLACK,16);
 }
 /* USER CODE END 4 */
 

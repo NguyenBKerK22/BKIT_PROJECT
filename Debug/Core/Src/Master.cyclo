@@ -1,6 +1,6 @@
-../Core/Src/master.c:9:6:f_master_fsm_def	22
-../Core/Src/master.c:124:7:f_master_get_temperature_def	1
-../Core/Src/master.c:127:7:f_master_get_current_def	1
-../Core/Src/master.c:130:7:f_master_get_voltage_def	1
-../Core/Src/master.c:133:10:f_master_get_light_def	2
-../Core/Src/master.c:141:10:f_master_get_potention_def	2
+../Core/Src/Master.c:9:6:f_master_fsm_def	22
+../Core/Src/Master.c:124:7:f_master_get_temperature_def	1
+../Core/Src/Master.c:127:7:f_master_get_current_def	1
+../Core/Src/Master.c:130:7:f_master_get_voltage_def	1
+../Core/Src/Master.c:133:10:f_master_get_light_def	2
+../Core/Src/Master.c:141:10:f_master_get_potention_def	2
