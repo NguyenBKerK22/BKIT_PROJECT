@@ -25,11 +25,40 @@ enum master_state_t{
 	PROCESSING_ERROR
 };
 extern modbus_handle_typedef_t master;
+/*
+ * @brief: Get temperature value in holding register
+ * @param: None
+ * @retval: Temperature value
+ */
 float f_master_get_temperature();
+/*
+ * @brief: Get current value in holding register
+ * @param: None
+ * @retval: Current value
+ */
 float f_master_get_current();
+/*
+ * @brief: Get voltage value in holding register
+ * @param: None
+ * @retval: Voltage value
+ */
 float f_master_get_voltage();
+/*
+ * @brief: Get light value in holding register
+ * @param: None
+ * @retval: Light value
+ */
 uint16_t f_master_get_light();
+/*
+ * @brief: Get potention value in holding register
+ * @param: None
+ * @retval: Potention value
+ */
 uint16_t f_master_get_potention();
-void f_rs485_parserFrame(uint8_t *pFrame, uint8_t FrameSize, uint8_t *Address, uint8_t *Function, uint8_t *Data, uint8_t *Datasize, uint16_t *Crc);
+/*
+ * @brief: Master Finite State Machine
+ * @param: None
+ * @retval: None
+ */
 void f_master_fsm();
 #endif /* INC_MASTER_H_ */
