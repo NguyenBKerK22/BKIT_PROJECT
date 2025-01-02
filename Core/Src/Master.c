@@ -5,6 +5,7 @@
  *      Author: ADMIN
  */
 #include "master.h"
+int error_count = 0;
 enum master_state_t master_behavior = IDLE;
 void _f_master_send_cmd_temperature(){
 	master.tx_buf[0] = slave_address;
@@ -59,7 +60,10 @@ void _f_master_send_cmd_potentiometer(){
 void f_master_fsm(){
 	switch(master_behavior){
 		case IDLE:
+			flag_master_is_idle = 1;
 			if(flag_send_cmd){
+				flag_send_cmd = 0;
+				flag_master_is_idle = 0;
 				switch(cmd_send){
 					case READ_TEMPERATURE:
 						_f_master_send_cmd_temperature();
@@ -106,7 +110,7 @@ void f_master_fsm(){
 			uint16_t _crc_receive;
 			f_rs485_parserFrame(master.rx_buf, master.rx_size, &_address, &_function, _data,&_data_size, &_crc_receive);
 			if(_crc_receive == crc16(master.rx_buf, master.rx_size - 2)){
-					switch(_function){
+				switch(_function){
 					case READ_HOLDING_REGISTER:
 						uint8_t _num_bytes = master.rx_buf[2];
 						uint16_t _address = (((uint16_t)master.tx_buf[2]<<8)|(master.tx_buf[3]));
@@ -120,14 +124,19 @@ void f_master_fsm(){
 						break;
 					default:
 						break;
-					}
-				master_behavior = PROCESSING_ERROR;
+				}
+				master_behavior = IDLE;
 			}
 			else{
 				master_behavior = PROCESSING_ERROR;
 			}
 			break;
 		case PROCESSING_ERROR:
+			error_count++;
+			if(error_count == 5){
+				flag_slave_not_respond = 1;
+				master_behavior = IDLE;
+			}
 			f_rs485_send_cmd(master.tx_buf, master.tx_size);
 			if(cmd_send == BROAD_CAST){
 				setTimer(TI_MASTER_TURN_ARROUND_TIMER, TI_MASTER_TURN_ARROUND_TIME);

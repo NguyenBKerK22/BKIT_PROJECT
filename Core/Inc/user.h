@@ -11,6 +11,7 @@
 #include "button.h"
 #include "lcd.h"
 #include "led_7seg.h"
+#include "stdio.h"
 enum user_behavior_t{
 	INIT,
 	SEND_MANUAL,

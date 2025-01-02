@@ -8,6 +8,11 @@
 enum user_behavior_t user_state = INIT;
 uint8_t led_7seg_colon_index = 0;
 void f_user_interface(){
+	if(flag_slave_not_respond == 1){
+		char _buf[22];
+		sprintf(_buf,"Slave %d not respond", slave_address);
+		lcd_show_string(10, 200, _buf, RED, BLACK, 16, 0);
+	}
 	switch(user_state){
 		case INIT:
 			user_state = SEND_MANUAL;
@@ -66,6 +71,13 @@ void f_user_interface(){
 			if(cmd_send != 0x00) flag_send_cmd = 1;
 			break;
 		case SEND_PERIOD:
+			if(flag_master_is_idle == 1){
+				cmd_send++;
+				flag_send_cmd = 1;
+				if(cmd_send >= 0x0B){
+					cmd_send = 0x01;
+				}
+			}
 			break;
 		default:
 			break;

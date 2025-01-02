@@ -37,4 +37,6 @@
 extern uint8_t slave_address;
 extern uint8_t cmd_send;
 extern uint8_t flag_send_cmd;
+extern uint8_t flag_slave_not_respond;
+extern uint8_t flag_master_is_idle;
 #endif /* INC_GLOBAL_H_ */
