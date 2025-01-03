@@ -215,6 +215,18 @@ void f_rs485_fsm()
 
 			if (isFlag(TI_RS485_T35_TIMER)) // CHANGE STATE -> RS485_IDLE
 			{
+				if (FRAME_STATUS == FRAME_OK)
+				{
+					// COPY content in _receive_buffer to _receive_buffer_callback
+					for (int i = 0; i < _receive_index; i++)
+					{
+						_receive_buffer_callback[i] = _receive_buffer[i];
+					}
+
+					*_flag_rx_callback = 1;
+					*_rx_size_callback = _receive_index;
+				}
+
 				_f_init_rs485_idle();
 				MODBUS485_STATE = RS485_IDLE;
 			}
