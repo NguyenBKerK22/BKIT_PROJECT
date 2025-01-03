@@ -15,6 +15,8 @@ void f_user_interface(){
 	}
 	switch(user_state){
 		case INIT:
+			led_7seg_set_digit(slave_address>>4, 0, led_7seg_colon_index==0);
+			led_7seg_set_digit(slave_address & 0x0F, 1, led_7seg_colon_index==1);
 			user_state = SEND_MANUAL;
 			break;
 		case SEND_MANUAL:
