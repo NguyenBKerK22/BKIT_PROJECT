@@ -130,7 +130,7 @@ void f_master_fsm(){
 					master_behavior = WAITING_TURN_ARROUND_DELAY;
 					break;
 				}
-				setTimer(TI_MASTER_WAITING_TIMER, TI_MASTER_TURN_ARROUND_TIME);
+				setTimer(TI_MASTER_WAITING_TIMER, TI_MASTER_WAITING_TIME);
 				master_behavior = WAITING_FOR_REPLY;
 			}
 			break;
