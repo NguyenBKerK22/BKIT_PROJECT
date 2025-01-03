@@ -27,6 +27,13 @@ enum frame_status_t
 	FRAME_NOT_OK
 };
 
+// FOR DEBUG
+#define DEBUG 1
+void uart_Rs232SendString(uint8_t* str){
+	HAL_UART_Transmit(&huart1, (void*)msg, sprintf((void*)msg,"%s",str), HAL_MAX_DELAY);
+}
+// END FOR
+
 UART_HandleTypeDef *_huart_callback;
 uint8_t *_receive_buffer_callback;
 uint8_t *_flag_rx_callback;
@@ -137,6 +144,9 @@ void f_rs485_send_cmd(uint8_t *tx_buffer_without_crc, uint8_t tx_size_without_cr
 
 void f_rs485_fsm_init()
 {
+	// DEBUG
+	if (DEBUG) uart_Rs232SendString((uint8_t*)"FSM_INIT\n\r");
+	// END DEBUG
 	HAL_GPIO_WritePin(EN_RS485_GPIO_Port, EN_RS485_Pin, 0);
 	HAL_UART_Receive_IT(_huart_callback, &_receive_byte_buffer, 1);
 }
@@ -239,6 +249,9 @@ void f_rs485_fsm()
 
 void _f_init_rs485_super_init()
 {
+	// DEBUG
+	if (DEBUG) uart_Rs232SendString((uint8_t*)"S: SUPER_INIT\n\r");
+	// END DEBUG
 	// Do not thing
 }
 
@@ -249,6 +262,9 @@ void _f_rs485_super_init()
 
 void _f_init_rs485_init()
 {
+	// DEBUG
+	if (DEBUG) uart_Rs232SendString((uint8_t*)"S: INIT\n\r");
+	// END DEBUG
 	setTimer(TI_RS485_T35_TIMER, TI_RS485_T35_TIME);
 }
 
@@ -259,6 +275,9 @@ void _f_rs485_init()
 
 void _f_init_rs485_idle()
 {
+	// DEBUG
+	if (DEBUG) uart_Rs232SendString((uint8_t*)"S: IDLE\n\r");
+	// END DEBUG
 	_transmit_flag = 0;
 	_receive_index = 0;
 }
@@ -270,6 +289,9 @@ void _f_rs485_idle()
 
 void _f_init_rs485_transmit()
 {
+	// DEBUG
+	if (DEBUG) uart_Rs232SendString((uint8_t*)"S: TRANS\n\r");
+	// END DEBUG
 	setTimer(TI_RS485_T35_TIMER, TI_RS485_T35_TIME);
 }
 
@@ -280,6 +302,9 @@ void _f_rs485_transmit()
 
 void _f_init_rs485_receive()
 {
+	// DEBUG
+	if (DEBUG) uart_Rs232SendString((uint8_t*)"S: RECEI\n\r");
+	// END DEBUG
 	setTimer(TI_RS485_T35_TIMER, TI_RS485_T35_TIME);
 	setTimer(TI_RS485_T15_TIMER, TI_RS485_T15_TIME);
 }
@@ -291,6 +316,9 @@ void _f_rs485_receive()
 
 void _f_init_rs485_waiting_control()
 {
+	// DEBUG
+	if (DEBUG) uart_Rs232SendString((uint8_t*)"S: WAIT\n\r");
+	// END DEBUG
 	_isCRCChecking = 0;
 }
 
