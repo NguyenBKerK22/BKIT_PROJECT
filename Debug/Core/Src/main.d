@@ -39,7 +39,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Inc/sensor.h ../Core/Inc/sensor.h ../Core/Inc/user.h \
  ../Core/Inc/global.h ../Core/Inc/button.h ../Core/Inc/lcd.h \
  ../Core/Inc/gpio.h ../Core/Inc/led_7seg.h ../Core/Inc/master.h \
- ../Core/Inc/rs485.h ../Core/Inc/crc16.h
+ ../Core/Inc/rs485.h ../Core/Inc/crc16.h ../Core/Inc/Slave.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -96,3 +96,4 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/master.h:
 ../Core/Inc/rs485.h:
 ../Core/Inc/crc16.h:
+../Core/Inc/Slave.h:

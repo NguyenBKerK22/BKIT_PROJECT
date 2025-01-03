@@ -2,7 +2,7 @@
 ../Core/Src/Slave.c:28:13:_f_splituint16_def	24	static
 ../Core/Src/Slave.c:34:13:_f_slave_read_multiple_holding_register_handler_def	16	static
 ../Core/Src/Slave.c:54:13:_f_slave_read_holding_register_handler_def	4	static
-../Core/Src/Slave.c:59:13:_f_slave_write_holding_register_handler_def	16	static
+../Core/Src/Slave.c:59:13:_f_slave_write_holding_register_handler_def	8	static
 ../Core/Src/Slave.c:67:13:_f_slave_commandparser_handler_def	4	static
 ../Core/Src/Slave.c:110:13:_f_read_data_def	24	static
 ../Core/Src/Slave.c:131:6:f_slave_init_def	8	static

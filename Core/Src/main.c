@@ -32,6 +32,7 @@
 #include "sensor.h"
 #include "user.h"
 #include "master.h"
+#include "Slave.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -40,7 +41,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define SLAVE
+#undef MASTER
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -123,6 +125,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim3);
   setTimer(TI_BUTTON_SCAN_TIMER, TI_BUTTON_SCAN_TIME);
   setTimer(TI_7SEG_SCAN_TIMER, TI_7SEG_SCAN_TIME);
+  f_slave_init_def();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -132,6 +135,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+#ifdef	MASTER
 	  if(isFlag(TI_BUTTON_SCAN_TIMER)){
 		  button_scan();
 		  setTimer(TI_BUTTON_SCAN_TIMER, TI_BUTTON_SCAN_TIME);
@@ -144,8 +148,21 @@ int main(void)
 	  f_user_interface();
 	  f_rs485_fsm();
 	  f_master_fsm();
-  }
+#endif
+#ifdef SLAVE
+	  if(isFlag(TI_BUTTON_SCAN_TIMER)){
+		  TestADC();
+		  button_scan();
+		  setTimer(TI_BUTTON_SCAN_TIMER, TI_BUTTON_SCAN_TIME);
+	  }
+	  if(isFlag(TI_7SEG_SCAN_TIMER)){
+		  led_7seg_display();
+		  setTimer(TI_7SEG_SCAN_TIMER, TI_7SEG_SCAN_TIME);
+	  }
+	  f_slave_behavior_def();
+#endif
   /* USER CODE END 3 */
+  }
 }
 
 /**

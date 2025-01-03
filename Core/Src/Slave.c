@@ -16,7 +16,7 @@ uint8_t flag_rx;
 uint8_t rx_size;
 uint8_t tx_size; // for dummy
 
-
+/*PRIVATE FUNCTION START DEFINE-----------------------------------------------------------------------------------------------------------*/
 static void _f_splitfloat_def(float _input, uint8_t *data)
 {
 	data[0] = *(((uint8_t*)&_input) + 0);
@@ -43,7 +43,7 @@ static void _f_slave_read_multiple_holding_register_handler_def(void)
 		tx_buf[i + 3] = _register_def[startReg];
 	}
 	tx_size = i + 3;
-	rs485_send_cmd(tx_buf, tx_size);
+	f_rs485_send_cmd(tx_buf, tx_size);
 
 	//	Modbus_Transmit_Slave(&slave, hDev->Address, slave.Rx_buf[1], &hDev->Register[startReg], numberOfReg * 2, 100);
 
@@ -58,10 +58,10 @@ static void _f_slave_read_holding_register_handler_def(void)
 
 static void _f_slave_write_holding_register_handler_def(void)
 {
-	rs485_send_cmd(rx_buf, rx_size);
+	f_rs485_send_cmd(rx_buf, rx_size);
 	_register_def[LED_REGISTER_ADDRESS] = rx_buf[4];
 	_register_def[LED_REGISTER_ADDRESS + 1] = rx_buf[5];
-	uint8_t CoilState = _register_def[LED_REGISTER_ADDRESS + 1];
+//	uint8_t CoilState = _register_def[LED_REGISTER_ADDRESS + 1];
 }
 
 static void _f_slave_commandparser_handler_def(void)
@@ -126,8 +126,10 @@ static void _f_read_data_def(void){
 	_f_splituint16_def(tempPt, &_register_def[POTENTIOMETER_REGISTER_ADDRESS], &_register_def[POTENTIOMETER_REGISTER_ADDRESS + 1]);
 }
 
+/*PRIVATE FUNCTION END DEFINE-----------------------------------------------------------------------------------------------------------*/
 
 
+/*PUBLIC FUNCTION START DEFINE-----------------------------------------------------------------------------------------------------------*/
 void f_slave_init_def(void)
 {
 	_slave_signal_def = 0;
@@ -142,12 +144,16 @@ void f_slave_behavior_def(void)
 	{
 	case STATE_IDLE:
 	{
+		if(1){
+			_slave_state_def = STATE_WAITTING_FOR_CMD;
+		}
 		break;
 	}
 	case STATE_WAITTING_FOR_CMD:
 	{
 		_f_read_data_def();
-		if(1){
+		if(flag_rx){
+			flag_rx = 0;
 			_slave_state_def = STATE_COMMAND_PARSER;
 		}
 		break;
@@ -187,4 +193,4 @@ void f_slave_behavior_def(void)
 }
 
 
-
+/*PUBLIC FUNCTION END DEFINE------------------------------------------------------------------------------------------------------------*/

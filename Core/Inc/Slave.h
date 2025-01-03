@@ -49,8 +49,6 @@ typedef enum{
 
 typedef uint8_t slave_signal_t;
 
-//void f_commandparser_handler_def(_slave_signal_def s);
-//void TurnOffAllLed(void);
 extern void f_slave_init_def(void);
 extern void f_slave_behavior_def(void);
 
