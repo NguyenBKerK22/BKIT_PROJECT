@@ -49,7 +49,13 @@ typedef enum{
 
 typedef uint8_t slave_signal_t;
 
+/**
+ * @brief Init finite state machine
+ */
 extern void f_slave_init_def(void);
+/**
+ * @brief Slave device main finite state machine
+ */
 extern void f_slave_behavior_def(void);
 
 
