@@ -29,6 +29,7 @@ enum frame_status_t
 
 // FOR DEBUG
 #define DEBUG 1
+uint8_t msg[100];
 void uart_Rs232SendString(uint8_t* str){
 	HAL_UART_Transmit(&huart1, (void*)msg, sprintf((void*)msg,"%s",str), HAL_MAX_DELAY);
 }

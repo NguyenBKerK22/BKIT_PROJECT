@@ -8,6 +8,7 @@
 #ifndef INC_RS485_H_
 #define INC_RS485_H_
 
+#include <stdio.h>
 #include "main.h"
 #include "crc16.h"
 #include "global.h"
