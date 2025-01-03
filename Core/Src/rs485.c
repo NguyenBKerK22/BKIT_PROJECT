@@ -6,7 +6,17 @@
  */
 #include "rs485.h"
 
-void f_rs485_init(uint8_t* tx_buf, uint8_t tx_size, uint8_t* rx_buf){
+/*
+ * @brief Initialize values for variable include: huart channel, receive_buffer
+ * address, flag_rx and rx_size
+ * @param huart: the uart/usart channel
+ * @param receive_buffer: a address of the buffer which size is 256
+ * @param flag_rx: flag for receive callback fsm
+ * @param rx_size: the size of receive command for callback fsm
+ * @retval: None
+ */
+void f_rs485_init(UART_HandleTypeDef *huart, uint8_t* receive_buffer, uint8_t* flag_rx, uint8_t* rx_size)
+{
 
 }
 

@@ -1,4 +1,0 @@
-../Core/Src/timer.c:13:6:setTimer	16	static
-../Core/Src/timer.c:19:6:timerRun	16	static
-../Core/Src/timer.c:34:5:isFlag	16	static
-../Core/Src/timer.c:43:5:msToTick	16	static
