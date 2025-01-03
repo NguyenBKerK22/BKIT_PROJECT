@@ -57,16 +57,23 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if(htim->Instance == TIM3){
+		timerRun();
+	}
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	RS485_UART_Callback(huart);
+}
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void TestADC();
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-	if(htim->Instance == TIM3){
-		timerRun();
-	}
-}
 /* USER CODE END 0 */
 
 /**
@@ -203,6 +210,7 @@ void TestADC() {
 				16);
 	}
 }
+
 /* USER CODE END 4 */
 
 /**

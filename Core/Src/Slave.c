@@ -161,6 +161,7 @@ void f_slave_behavior_def(void)
 	{
 		_f_read_data_def();
 		if(_f_is_flag_def()){
+			uart_Rs232SendString((uint8_t*)"FLAG_ON\n\r");
 			_slave_state_def = STATE_COMMAND_PARSER;
 		}
 		break;

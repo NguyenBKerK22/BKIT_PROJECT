@@ -8,10 +8,14 @@
 #ifndef INC_RS485_H_
 #define INC_RS485_H_
 
+#include <stdio.h>
 #include "main.h"
 #include "crc16.h"
 #include "global.h"
 #include "usart.h"
+
+
+void uart_Rs232SendString(uint8_t* str);
 
 void f_rs485_init(UART_HandleTypeDef *huart, uint8_t *receive_buffer, uint8_t *flag_rx, uint16_t *rx_size);
 
