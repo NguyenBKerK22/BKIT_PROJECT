@@ -7,6 +7,14 @@
 #include "master.h"
 int error_count = 0;
 enum master_state_t master_behavior = IDLE;
+modbus_handle_typedef_t master;
+uint8_t slave_address = 0x01;
+uint8_t cmd_send = 0x00;
+uint8_t flag_send_cmd = 0;
+uint8_t flag_slave_not_respond = 0;
+uint8_t flag_master_is_idle = 1;
+uint8_t flag_rx = 0;
+
 void _f_master_send_cmd_temperature(){
 	master.tx_buf[0] = slave_address;
 	master.tx_buf[1] = READ_HOLDING_REGISTER;
@@ -57,6 +65,39 @@ void _f_master_send_cmd_potentiometer(){
 	master.tx_size = 6;
 }
 
+void _f_master_parserFrame(
+		uint8_t *pFrame,
+		uint8_t FrameSize,
+		uint8_t *Address,
+		uint8_t *Function,
+		uint8_t *Data,
+		uint8_t *Datasize,
+		uint16_t *Crc)
+{
+	int i;
+	*Address = pFrame[0];
+	*Function = pFrame[1];
+	*Datasize = FrameSize - 4;
+	for(i = 0;i < *Datasize; i++){
+		Data[i] = *(pFrame + 2 + i);
+	}
+	*Crc = 0;
+	*Crc |= ((uint16_t)(pFrame[FrameSize - 1]) << 8) | ((uint16_t)(pFrame[FrameSize - 2]) & 0x00FF);
+}
+int _f_isFlagReceive(){
+	if(flag_rx == 1){
+		flag_rx = 0;
+		return 1;
+	}
+	return 0;
+}
+void f_master_init(){
+	master.address = slave_address;
+	f_rs485_init(&huart3, master.rx_buf, &flag_rx, &master.rx_size);
+	memset(master.tx_buf, 0, sizeof(master.tx_buf));
+	master.tx_size = 0;
+}
+
 void f_master_fsm(){
 	switch(master_behavior){
 		case IDLE:
@@ -97,8 +138,8 @@ void f_master_fsm(){
 			if(isFlag(TI_MASTER_TURN_ARROUND_TIMER)) master_behavior = IDLE;
 			break;
 		case WAITING_FOR_REPLY:
-			if(isFlag(TI_MASTER_TURN_ARROUND_TIME)) master_behavior = PROCESSING_ERROR;
-			else if(f_rs485_received()){
+			if(isFlag(TI_MASTER_TURN_ARROUND_TIMER)) master_behavior = PROCESSING_ERROR;
+			else if(_f_isFlagReceive()){
 				master_behavior = PROCESSING_REPLY;
 			}
 			break;
@@ -108,7 +149,7 @@ void f_master_fsm(){
 			uint8_t _data[256];
 			uint8_t _data_size;
 			uint16_t _crc_receive;
-			f_rs485_parserFrame(master.rx_buf, master.rx_size, &_address, &_function, _data,&_data_size, &_crc_receive);
+			_f_master_parserFrame(master.rx_buf, master.rx_size, &_address, &_function, _data,&_data_size, &_crc_receive);
 			if(_crc_receive == crc16(master.rx_buf, master.rx_size - 2)){
 				switch(_function){
 					case READ_HOLDING_REGISTER:
@@ -136,6 +177,7 @@ void f_master_fsm(){
 			if(error_count == 5){
 				flag_slave_not_respond = 1;
 				master_behavior = IDLE;
+				break;
 			}
 			f_rs485_send_cmd(master.tx_buf, master.tx_size);
 			if(cmd_send == BROAD_CAST){
