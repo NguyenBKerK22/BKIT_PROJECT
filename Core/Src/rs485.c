@@ -20,24 +20,22 @@ void f_rs485_init(UART_HandleTypeDef *huart, uint8_t* receive_buffer, uint8_t* f
 
 }
 
-void f_rs485_send_cmd(uint8_t* tx_buf, uint8_t tx_size){
-
-}
-
-void f_rs485_fsm(){
-
-}
-
-void f_rs485_parserFrame(uint8_t *pFrame, uint8_t FrameSize, uint8_t *Address, uint8_t *Function, uint8_t *Data, uint8_t *Datasize, uint16_t *Crc){
-
-}
-
-int f_rs485_received(){
-	return -1;
-}
-
-void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
+/*
+ * @brief Send a rs485 cmd
+ * @param tx_buffer_without_crc: transmit buffer address, maxsize is 254
+ * @param tx_size_without_crc: number of bytes transmit, max is 254
+ * @retval: None
+ */
+void f_rs485_send_cmd(uint8_t* tx_buffer_without_crc, uint8_t tx_size_without_crc)
 {
 
 }
 
+/*
+ * @brief: RS485 Finite State Machine
+ * @retval: None
+ */
+void f_rs485_fsm()
+{
+
+}
