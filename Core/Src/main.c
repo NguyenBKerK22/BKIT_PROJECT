@@ -56,17 +56,15 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void TestADC();
 void lcd_run();
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-	if(htim->Instance == TIM3){
-		timerRun();
-	}
-}
+
 /* USER CODE END 0 */
 
 /**
@@ -225,6 +223,18 @@ void lcd_run(){
 	lcd_show_int_num(130, 160, f_master_get_light(), 4, RED, BLACK, 16);
 	lcd_show_string(10, 180, "Potentiometer:", RED, BLACK, 16, 0);
 	lcd_show_int_num(130, 180, f_master_get_potention(), 4, RED, BLACK,16);
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if(htim->Instance == TIM3){
+		timerRun();
+	}
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	RS485_UART_Callback(huart);
 }
 /* USER CODE END 4 */
 
