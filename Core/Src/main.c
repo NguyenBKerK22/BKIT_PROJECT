@@ -29,9 +29,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "global.h"
+#include "button.h"
 #include "sensor.h"
-#include "user.h"
-#include "master.h"
 #include "Slave.h"
 /* USER CODE END Includes */
 
@@ -53,7 +52,6 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-modbus_handle_typedef_t master;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -64,7 +62,6 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void TestADC();
-void lcd_run();
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	if(htim->Instance == TIM3){
 		timerRun();
@@ -110,15 +107,6 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-  led_7seg_init();
-  led_7seg_set_colon(1);
-  led_7seg_debug_turn_off(6);
-  led_7seg_debug_turn_off(7);
-  led_7seg_debug_turn_off(8);
-  led_7seg_set_digit(0, 0, 0 );
-  led_7seg_set_digit(0, 1, 0 );
-  led_7seg_set_digit(0, 2, 0 );
-  led_7seg_set_digit(0, 3, 0 );
   lcd_init();
   sensor_init();
   lcd_clear(BLACK);
@@ -135,31 +123,14 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-#ifdef	MASTER
-	  if(isFlag(TI_BUTTON_SCAN_TIMER)){
-		  button_scan();
-		  setTimer(TI_BUTTON_SCAN_TIMER, TI_BUTTON_SCAN_TIME);
-	  }
-	  if(isFlag(TI_7SEG_SCAN_TIMER)){
-		  led_7seg_display();
-		  setTimer(TI_7SEG_SCAN_TIMER, TI_7SEG_SCAN_TIME);
-	  }
-	  lcd_run();
-	  f_user_interface();
-	  f_rs485_fsm();
-	  f_master_fsm();
-#endif
 #ifdef SLAVE
 	  if(isFlag(TI_BUTTON_SCAN_TIMER)){
 		  TestADC();
 		  button_scan();
 		  setTimer(TI_BUTTON_SCAN_TIMER, TI_BUTTON_SCAN_TIME);
 	  }
-	  if(isFlag(TI_7SEG_SCAN_TIMER)){
-		  led_7seg_display();
-		  setTimer(TI_7SEG_SCAN_TIMER, TI_7SEG_SCAN_TIME);
-	  }
 	  f_slave_behavior_def();
+	  f_rs485_fsm();
 #endif
   /* USER CODE END 3 */
   }
@@ -230,18 +201,6 @@ void TestADC() {
 		lcd_show_float_num(130, 180, sensor_get_temperature(), 4, RED, BLACK,
 				16);
 	}
-}
-void lcd_run(){
-	lcd_show_string(10, 100, "Temperature:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 100, f_master_get_temperature(), 4, RED, BLACK, 16);
-	lcd_show_string(10, 120, "Current:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 120, f_master_get_current(), 4, RED, BLACK, 16);
-	lcd_show_string(10, 140, "Voltage:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 140, f_master_get_voltage(), 4, RED, BLACK, 16);
-	lcd_show_string(10, 160, "Light:", RED, BLACK, 16, 0);
-	lcd_show_int_num(130, 160, f_master_get_light(), 4, RED, BLACK, 16);
-	lcd_show_string(10, 180, "Potentiometer:", RED, BLACK, 16, 0);
-	lcd_show_int_num(130, 180, f_master_get_potention(), 4, RED, BLACK,16);
 }
 /* USER CODE END 4 */
 

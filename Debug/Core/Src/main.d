@@ -36,10 +36,10 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Inc/adc.h ../Core/Inc/main.h ../Core/Inc/dma.h ../Core/Inc/spi.h \
  ../Core/Inc/tim.h ../Core/Inc/usart.h ../Core/Inc/gpio.h \
  ../Core/Inc/fsmc.h ../Core/Inc/global.h ../Core/Inc/timer.h \
- ../Core/Inc/sensor.h ../Core/Inc/sensor.h ../Core/Inc/user.h \
- ../Core/Inc/global.h ../Core/Inc/button.h ../Core/Inc/lcd.h \
- ../Core/Inc/gpio.h ../Core/Inc/led_7seg.h ../Core/Inc/master.h \
- ../Core/Inc/rs485.h ../Core/Inc/crc16.h ../Core/Inc/Slave.h
+ ../Core/Inc/button.h ../Core/Inc/global.h ../Core/Inc/sensor.h \
+ ../Core/Inc/sensor.h ../Core/Inc/Slave.h ../Core/Inc/lcd.h \
+ ../Core/Inc/gpio.h ../Core/Inc/rs485.h ../Core/Inc/crc16.h \
+ ../Core/Inc/usart.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -85,15 +85,13 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/fsmc.h:
 ../Core/Inc/global.h:
 ../Core/Inc/timer.h:
-../Core/Inc/sensor.h:
-../Core/Inc/sensor.h:
-../Core/Inc/user.h:
-../Core/Inc/global.h:
 ../Core/Inc/button.h:
+../Core/Inc/global.h:
+../Core/Inc/sensor.h:
+../Core/Inc/sensor.h:
+../Core/Inc/Slave.h:
 ../Core/Inc/lcd.h:
 ../Core/Inc/gpio.h:
-../Core/Inc/led_7seg.h:
-../Core/Inc/master.h:
 ../Core/Inc/rs485.h:
 ../Core/Inc/crc16.h:
-../Core/Inc/Slave.h:
+../Core/Inc/usart.h:

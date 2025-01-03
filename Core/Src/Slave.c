@@ -126,6 +126,13 @@ static void _f_read_data_def(void){
 	_f_splituint16_def(tempPt, &_register_def[POTENTIOMETER_REGISTER_ADDRESS], &_register_def[POTENTIOMETER_REGISTER_ADDRESS + 1]);
 }
 
+static uint8_t _f_is_flag_def(void){
+	if(flag_rx){
+		flag_rx = 0;
+		return 1;
+	}
+	return 0;
+}
 /*PRIVATE FUNCTION END DEFINE-----------------------------------------------------------------------------------------------------------*/
 
 
@@ -136,6 +143,7 @@ void f_slave_init_def(void)
 	_slave_state_def = STATE_IDLE;
 	_address_def = SLAVE_ADDRESS;
 	memset(_register_def, 0, sizeof(_register_def));
+	f_rs485_init(&huart3, rx_buf, &flag_rx, &rx_size);
 }
 
 void f_slave_behavior_def(void)
@@ -152,8 +160,7 @@ void f_slave_behavior_def(void)
 	case STATE_WAITTING_FOR_CMD:
 	{
 		_f_read_data_def();
-		if(flag_rx){
-			flag_rx = 0;
+		if(_f_is_flag_def()){
 			_slave_state_def = STATE_COMMAND_PARSER;
 		}
 		break;

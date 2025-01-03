@@ -5,5 +5,6 @@
 ../Core/Src/Slave.c:59:13:_f_slave_write_holding_register_handler_def	1
 ../Core/Src/Slave.c:67:13:_f_slave_commandparser_handler_def	1
 ../Core/Src/Slave.c:110:13:_f_read_data_def	1
-../Core/Src/Slave.c:133:6:f_slave_init_def	1
-../Core/Src/Slave.c:141:6:f_slave_behavior_def	8
+../Core/Src/Slave.c:129:16:_f_is_flag_def	2
+../Core/Src/Slave.c:140:6:f_slave_init_def	1
+../Core/Src/Slave.c:149:6:f_slave_behavior_def	8

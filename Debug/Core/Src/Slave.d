@@ -34,7 +34,8 @@ Core/Src/Slave.o: ../Core/Src/Slave.c ../Core/Inc/Slave.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Core/Inc/lcd.h ../Core/Inc/gpio.h ../Core/Inc/rs485.h \
- ../Core/Inc/crc16.h ../Core/Inc/sensor.h
+ ../Core/Inc/crc16.h ../Core/Inc/global.h ../Core/Inc/timer.h \
+ ../Core/Inc/usart.h ../Core/Inc/sensor.h
 ../Core/Inc/Slave.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -75,4 +76,7 @@ Core/Src/Slave.o: ../Core/Src/Slave.c ../Core/Inc/Slave.h \
 ../Core/Inc/gpio.h:
 ../Core/Inc/rs485.h:
 ../Core/Inc/crc16.h:
+../Core/Inc/global.h:
+../Core/Inc/timer.h:
+../Core/Inc/usart.h:
 ../Core/Inc/sensor.h:

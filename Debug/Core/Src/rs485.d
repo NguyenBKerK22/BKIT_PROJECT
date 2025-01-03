@@ -33,7 +33,9 @@ Core/Src/rs485.o: ../Core/Src/rs485.c ../Core/Inc/rs485.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/crc16.h
+ ../Core/Inc/crc16.h ../Core/Inc/global.h ../Core/Inc/timer.h \
+ ../Core/Inc/usart.h ../Core/Inc/usart.h ../Core/Inc/timer.h \
+ ../Core/Inc/global.h ../Core/Inc/crc16.h
 ../Core/Inc/rs485.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -70,4 +72,11 @@ Core/Src/rs485.o: ../Core/Src/rs485.c ../Core/Inc/rs485.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
+../Core/Inc/crc16.h:
+../Core/Inc/global.h:
+../Core/Inc/timer.h:
+../Core/Inc/usart.h:
+../Core/Inc/usart.h:
+../Core/Inc/timer.h:
+../Core/Inc/global.h:
 ../Core/Inc/crc16.h:
