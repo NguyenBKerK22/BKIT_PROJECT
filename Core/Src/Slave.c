@@ -13,7 +13,7 @@ static slave_state_t _slave_state_def;
 uint8_t tx_buf[256]; // for dummy
 uint8_t rx_buf[256];
 uint8_t flag_rx;
-uint8_t rx_size;
+uint16_t rx_size;
 uint8_t tx_size; // for dummy
 
 /*PRIVATE FUNCTION START DEFINE-----------------------------------------------------------------------------------------------------------*/
@@ -44,6 +44,7 @@ static void _f_slave_read_multiple_holding_register_handler_def(void)
 	}
 	tx_size = i + 3;
 	f_rs485_send_cmd(tx_buf, tx_size);
+	HAL_UART_Transmit(&huart1, tx_buf, tx_size, 100);
 
 	//	Modbus_Transmit_Slave(&slave, hDev->Address, slave.Rx_buf[1], &hDev->Register[startReg], numberOfReg * 2, 100);
 
@@ -66,7 +67,7 @@ static void _f_slave_write_holding_register_handler_def(void)
 
 static void _f_slave_commandparser_handler_def(void)
 {
-	switch(1){
+	switch(rx_buf[1]){
 	case SIGNAL_READ_COIL:
 	{
 		break;
@@ -77,7 +78,7 @@ static void _f_slave_commandparser_handler_def(void)
 	}
 	case SIGNAL_READ_HOLDING_REGISTER:
 	{
-		_slave_state_def = STATE_READ_HOLDING_REGISTER_HANDLER;
+		_slave_state_def = STATE_READ_MULTIPLE_HOLDING_REGISTER_HANDLER;
 		break;
 	}
 	case SIGNAL_READ_INPUT_REGISTER:
@@ -161,7 +162,6 @@ void f_slave_behavior_def(void)
 	{
 		_f_read_data_def();
 		if(_f_is_flag_def()){
-			uart_Rs232SendString((uint8_t*)"FLAG_ON\n\r");
 			_slave_state_def = STATE_COMMAND_PARSER;
 		}
 		break;

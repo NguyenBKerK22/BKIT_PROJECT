@@ -1,10 +1,10 @@
 ../Core/Src/Slave.c:20:13:_f_splitfloat_def	16	static
 ../Core/Src/Slave.c:28:13:_f_splituint16_def	24	static
 ../Core/Src/Slave.c:34:13:_f_slave_read_multiple_holding_register_handler_def	16	static
-../Core/Src/Slave.c:54:13:_f_slave_read_holding_register_handler_def	4	static
-../Core/Src/Slave.c:59:13:_f_slave_write_holding_register_handler_def	8	static
-../Core/Src/Slave.c:67:13:_f_slave_commandparser_handler_def	4	static
-../Core/Src/Slave.c:110:13:_f_read_data_def	24	static
-../Core/Src/Slave.c:129:16:_f_is_flag_def	4	static
-../Core/Src/Slave.c:140:6:f_slave_init_def	8	static
-../Core/Src/Slave.c:149:6:f_slave_behavior_def	8	static
+../Core/Src/Slave.c:55:13:_f_slave_read_holding_register_handler_def	4	static
+../Core/Src/Slave.c:60:13:_f_slave_write_holding_register_handler_def	8	static
+../Core/Src/Slave.c:68:13:_f_slave_commandparser_handler_def	4	static
+../Core/Src/Slave.c:111:13:_f_read_data_def	24	static
+../Core/Src/Slave.c:130:16:_f_is_flag_def	4	static
+../Core/Src/Slave.c:141:6:f_slave_init_def	8	static
+../Core/Src/Slave.c:150:6:f_slave_behavior_def	8	static
