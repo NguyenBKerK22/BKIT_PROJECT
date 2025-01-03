@@ -178,6 +178,8 @@ void f_master_fsm(){
 			error_count++;
 			if(error_count >= 5){
 				flag_slave_not_respond = 1;
+				flag_send_cmd = 0;
+				cmd_send = 0x00;
 				master_behavior = IDLE;
 				break;
 			}
