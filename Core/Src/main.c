@@ -116,6 +116,7 @@ int main(void)
   led_7seg_set_digit(0, 3, 0 );
   lcd_init();
   sensor_init();
+  f_rs485_fsm_init();
   lcd_clear(BLACK);
   HAL_TIM_Base_Start_IT(&htim3);
   setTimer(TI_BUTTON_SCAN_TIMER, TI_BUTTON_SCAN_TIME);

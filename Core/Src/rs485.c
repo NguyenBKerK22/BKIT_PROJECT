@@ -137,7 +137,8 @@ void f_rs485_send_cmd(uint8_t *tx_buffer_without_crc, uint8_t tx_size_without_cr
 
 void f_rs485_fsm_init()
 {
-
+	HAL_GPIO_WritePin(EN_RS485_GPIO_Port, EN_RS485_Pin, 0);
+	HAL_UART_Receive_IT(_huart_callback, &_receive_byte_buffer, 1);
 }
 
 /*
