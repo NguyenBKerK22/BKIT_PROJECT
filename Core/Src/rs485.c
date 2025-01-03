@@ -32,7 +32,7 @@ void f_rs485_send_cmd(uint8_t* tx_buffer_without_crc, uint8_t tx_size_without_cr
 }
 
 /*
- * @brief: RS485 Finite State Machine
+ * @brief: RS485 Finite State Machine, this must be put in while loop
  * @retval: None
  */
 void f_rs485_fsm()
