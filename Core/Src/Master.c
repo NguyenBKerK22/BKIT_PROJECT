@@ -151,29 +151,24 @@ void f_master_fsm(){
 			uint8_t _data_size;
 			uint16_t _crc_receive;
 			_f_master_parserFrame(master.rx_buf, master.rx_size, &_address, &_function, _data,&_data_size, &_crc_receive);
-			if(_crc_receive == crc16(master.rx_buf, master.rx_size - 2)){
-				switch(_function){
-					case READ_HOLDING_REGISTER:
-					{
-						uint8_t _num_bytes = master.rx_buf[2];
-						uint16_t _address = (((uint16_t)master.tx_buf[2]<<8)|(master.tx_buf[3]));
-						for(int i=0;i<_num_bytes;i++){
-							master.holding_register[i + _address]  = master.rx_buf[i+3];
-						}
-						break;
+			switch(_function){
+				case READ_HOLDING_REGISTER:
+				{
+					uint8_t _num_bytes = master.rx_buf[2];
+					uint16_t _address = (((uint16_t)master.tx_buf[2]<<8)|(master.tx_buf[3]));
+					for(int i=0;i<_num_bytes;i++){
+						master.holding_register[i + _address]  = master.rx_buf[i+3];
 					}
-					case WRITE_MULTIPLE_HOLDING_REGISTER:
-						break;
-					case WRITE_SINGLE_COIL:
-						break;
-					default:
-						break;
+					break;
 				}
-				master_behavior = IDLE;
+				case WRITE_MULTIPLE_HOLDING_REGISTER:
+					break;
+				case WRITE_SINGLE_COIL:
+					break;
+				default:
+					break;
 			}
-			else{
-				master_behavior = PROCESSING_ERROR;
-			}
+			master_behavior = IDLE;
 			break;
 		}
 		case PROCESSING_ERROR:
