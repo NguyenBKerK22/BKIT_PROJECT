@@ -130,6 +130,7 @@ void f_master_fsm(){
 					master_behavior = WAITING_TURN_ARROUND_DELAY;
 					break;
 				}
+				error_count = 0;
 				setTimer(TI_MASTER_WAITING_TIMER, TI_MASTER_WAITING_TIME);
 				master_behavior = WAITING_FOR_REPLY;
 			}
@@ -168,12 +169,14 @@ void f_master_fsm(){
 				default:
 					break;
 			}
+			flag_send_cmd = 0;
+			cmd_send = 0x00;
 			master_behavior = IDLE;
 			break;
 		}
 		case PROCESSING_ERROR:
 			error_count++;
-			if(error_count == 5){
+			if(error_count >= 5){
 				flag_slave_not_respond = 1;
 				master_behavior = IDLE;
 				break;
@@ -184,7 +187,7 @@ void f_master_fsm(){
 				master_behavior = WAITING_TURN_ARROUND_DELAY;
 				break;
 			}
-			setTimer(TI_MASTER_WAITING_TIMER, TI_MASTER_TURN_ARROUND_TIME);
+			setTimer(TI_MASTER_WAITING_TIMER, TI_MASTER_WAITING_TIME);
 			master_behavior = WAITING_FOR_REPLY;
 			break;
 		default:
