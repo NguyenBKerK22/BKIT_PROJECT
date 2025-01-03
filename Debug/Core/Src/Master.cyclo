@@ -4,8 +4,8 @@
 ../Core/Src/Master.c:40:6:_f_master_send_cmd_light	1
 ../Core/Src/Master.c:50:6:_f_master_send_cmd_potentiometer	1
 ../Core/Src/Master.c:60:6:f_master_fsm	23
-../Core/Src/Master.c:151:7:f_master_get_temperature	1
-../Core/Src/Master.c:155:7:f_master_get_current	1
-../Core/Src/Master.c:159:7:f_master_get_voltage	1
-../Core/Src/Master.c:163:10:f_master_get_light	2
-../Core/Src/Master.c:172:10:f_master_get_potention	2
+../Core/Src/Master.c:154:7:f_master_get_temperature	1
+../Core/Src/Master.c:158:7:f_master_get_current	1
+../Core/Src/Master.c:162:7:f_master_get_voltage	1
+../Core/Src/Master.c:166:10:f_master_get_light	2
+../Core/Src/Master.c:175:10:f_master_get_potention	2

@@ -1,4 +1,5 @@
 "./Core/Src/Master.o"
+"./Core/Src/Slave.o"
 "./Core/Src/adc.o"
 "./Core/Src/button.o"
 "./Core/Src/crc16.o"
