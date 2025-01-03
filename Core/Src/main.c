@@ -113,6 +113,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim3);
   setTimer(TI_BUTTON_SCAN_TIMER, TI_BUTTON_SCAN_TIME);
   setTimer(TI_7SEG_SCAN_TIMER, TI_7SEG_SCAN_TIME);
+  f_rs485_fsm_init();
   f_slave_init_def();
   /* USER CODE END 2 */
 
