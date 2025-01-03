@@ -149,7 +149,7 @@ void f_rs485_fsm_init()
 	if (DEBUG) uart_Rs232SendString((uint8_t*)"FSM_INIT\n\r");
 	// END DEBUG
 	HAL_GPIO_WritePin(EN_RS485_GPIO_Port, EN_RS485_Pin, 0);
-	HAL_UART_Receive_IT(_huart_callback, &_receive_byte_buffer, 1);
+	HAL_UART_Receive_IT(&huart3, &_receive_byte_buffer, 1);
 }
 
 /*
@@ -229,6 +229,8 @@ void f_rs485_fsm()
 			{
 				if (FRAME_STATUS == FRAME_OK)
 				{
+					if (DEBUG) uart_Rs232SendString((uint8_t*)"S: FRAME_OK\n\r");
+
 					// COPY content in _receive_buffer to _receive_buffer_callback
 					for (int i = 0; i < _receive_index; i++)
 					{
@@ -348,15 +350,14 @@ void _f_rs485_waiting_control()
 
 void RS485_UART_Callback(UART_HandleTypeDef *huart)
 {
-	if (huart == _huart_callback)
+	if (huart->Instance == USART3)
 	{
 		_receive_buffer[_receive_index++] = _receive_byte_buffer;
 		_character_received_flag = 1;
-
 		// DEBUG
 		HAL_UART_Transmit(&huart1, &_receive_byte_buffer, 1, HAL_MAX_DELAY);
 		// END DEBUG
 
-		HAL_UART_Receive_IT(_huart_callback, &_receive_byte_buffer, 1);
+		HAL_UART_Receive_IT(&huart3, &_receive_byte_buffer, 1);
 	}
 }

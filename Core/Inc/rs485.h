@@ -14,6 +14,9 @@
 #include "global.h"
 #include "usart.h"
 
+
+void uart_Rs232SendString(uint8_t* str);
+
 void f_rs485_init(UART_HandleTypeDef *huart, uint8_t *receive_buffer, uint8_t *flag_rx, uint16_t *rx_size);
 
 void f_rs485_send_cmd(uint8_t *tx_buffer_without_crc, uint8_t tx_size_without_crc);

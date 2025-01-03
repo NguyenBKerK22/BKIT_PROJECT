@@ -138,7 +138,7 @@ void f_master_fsm(){
 			if(isFlag(TI_MASTER_TURN_ARROUND_TIMER)) master_behavior = IDLE;
 			break;
 		case WAITING_FOR_REPLY:
-			if(isFlag(TI_MASTER_TURN_ARROUND_TIMER)) master_behavior = PROCESSING_ERROR;
+			if(isFlag(TI_MASTER_WAITING_TIMER)) master_behavior = PROCESSING_ERROR;
 			else if(_f_isFlagReceive()){
 				master_behavior = PROCESSING_REPLY;
 			}
