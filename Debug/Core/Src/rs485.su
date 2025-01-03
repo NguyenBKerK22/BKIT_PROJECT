@@ -1,6 +1,0 @@
-../Core/Src/rs485.c:9:6:f_rs485_init	24	static
-../Core/Src/rs485.c:13:6:f_rs485_send_cmd	16	static
-../Core/Src/rs485.c:17:6:f_rs485_fsm	4	static
-../Core/Src/rs485.c:21:6:f_rs485_parserFrame	24	static
-../Core/Src/rs485.c:25:5:f_rs485_received	4	static
-../Core/Src/rs485.c:29:6:HAL_UARTEx_RxEventCallback	16	static

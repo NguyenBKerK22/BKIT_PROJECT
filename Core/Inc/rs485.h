@@ -7,26 +7,13 @@
 
 #ifndef INC_RS485_H_
 #define INC_RS485_H_
+
 #include "main.h"
 #include "crc16.h"
-extern UART_HandleTypeDef huart1;
-extern UART_HandleTypeDef huart3;
-#define READ_COIL 0x01
-#define READ_DISCRETE_INPUT 0x02
-#define READ_HOLDING_REGISTER 0x03
-#define READ_INPUT_REGISTER 0x04
-#define WRITE_SINGLE_COIL 0x05
-#define WRITE_SINGLE_HOLDING_REGISTER 0x06
-#define WRITE_MULTIPLE_COIL 0x0F
-#define WRITE_MULTIPLE_HOLDING_REGISTER 0x10
-/*
- * @brief: Initialize value for variable
- * @param: tx_buf - Transmit buffer
- * @param: tx_size - Number of bytes transmit
- * @param: rx_buf - Receive buffer
- * @retval: None
- */
-void f_rs485_init(uint8_t* tx_buf, uint8_t tx_size, uint8_t* rx_buf);
+#include "global.h"
+#include "usart.h"
+
+void f_rs485_init(UART_HandleTypeDef *huart, uint8_t* receive_buffer, uint8_t* flag_rx, uint8_t* rx_size);
 
 /*
  * @brief: Send command without CRC
