@@ -57,6 +57,7 @@ extern void f_slave_init_def(void);
  * @brief Slave device main finite state machine
  */
 extern void f_slave_behavior_def(void);
+void f_display_slave_value_def(void);
 
 
 

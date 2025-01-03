@@ -120,6 +120,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim3);
   setTimer(TI_BUTTON_SCAN_TIMER, TI_BUTTON_SCAN_TIME);
   setTimer(TI_7SEG_SCAN_TIMER, TI_7SEG_SCAN_TIME);
+  setTimer(TI_SLAVE_READ_DATA_TIMER, TI_SLAVE_READ_DATA_TIME);
   f_rs485_fsm_init();
   f_slave_init_def();
   /* USER CODE END 2 */
@@ -133,9 +134,13 @@ int main(void)
     /* USER CODE BEGIN 3 */
 #ifdef SLAVE
 	  if(isFlag(TI_BUTTON_SCAN_TIMER)){
-		  TestADC();
 		  button_scan();
 		  setTimer(TI_BUTTON_SCAN_TIMER, TI_BUTTON_SCAN_TIME);
+	  }
+	  if(isFlag(TI_SLAVE_READ_DATA_TIMER)){
+		  sensor_read();
+		  f_display_slave_value_def();
+		  setTimer(TI_SLAVE_READ_DATA_TIMER, TI_SLAVE_READ_DATA_TIME);
 	  }
 	  f_slave_behavior_def();
 	  f_rs485_fsm();

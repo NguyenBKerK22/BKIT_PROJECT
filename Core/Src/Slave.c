@@ -17,7 +17,7 @@ uint16_t rx_size;
 uint8_t tx_size; // for dummy
 
 /*PRIVATE FUNCTION START DEFINE-----------------------------------------------------------------------------------------------------------*/
-static void _f_splitfloat_def(float _input, uint8_t *data)
+void _f_splitfloat_def(float _input, uint8_t *data)
 {
 	data[0] = *(((uint8_t*)&_input) + 0);
 	data[1] = *(((uint8_t*)&_input) + 1);
@@ -25,7 +25,7 @@ static void _f_splitfloat_def(float _input, uint8_t *data)
 	data[3] = *(((uint8_t*)&_input) + 3);
 }
 
-static void _f_splituint16_def(uint16_t input, uint8_t *higherByte, uint8_t *lowerByte)
+void _f_splituint16_def(uint16_t input, uint8_t *higherByte, uint8_t *lowerByte)
 {
     *higherByte = (input >> 8) & 0xFF; // Lấy 8 bit cao
     *lowerByte = input & 0xFF;        // Lấy 8 bit thấp
@@ -44,7 +44,7 @@ static void _f_slave_read_multiple_holding_register_handler_def(void)
 	}
 	tx_size = i + 3;
 	f_rs485_send_cmd(tx_buf, tx_size);
-	HAL_UART_Transmit(&huart1, tx_buf, tx_size, 100);
+	HAL_UART_Transmit(&huart1, _register_def, 10, 100);
 
 	//	Modbus_Transmit_Slave(&slave, hDev->Address, slave.Rx_buf[1], &hDev->Register[startReg], numberOfReg * 2, 100);
 
@@ -108,12 +108,17 @@ static void _f_slave_commandparser_handler_def(void)
 	}
 }
 
+float tempCur;
+uint16_t tempLt;
+uint16_t tempPt;
+float tempT;
+float tempVol;
 static void _f_read_data_def(void){
-	float tempCur = sensor_get_current();
-	uint16_t tempLt = sensor_get_light();
-	uint16_t tempPt =sensor_get_potentiometer();
-	float tempT = sensor_get_temperature();
-	float tempVol = sensor_get_voltage();
+	tempCur = sensor_get_current();
+	tempLt = sensor_get_light();
+	tempPt =sensor_get_potentiometer();
+	tempT = sensor_get_temperature();
+	tempVol = sensor_get_voltage();
 
 	// Current
 	_f_splitfloat_def(tempCur, &_register_def[CURRENT_REGISTER_ADDRESS]);
@@ -138,6 +143,21 @@ static uint8_t _f_is_flag_def(void){
 
 
 /*PUBLIC FUNCTION START DEFINE-----------------------------------------------------------------------------------------------------------*/
+void f_display_slave_value_def(void)
+{
+	lcd_show_string(10, 100, "Voltage:", RED, BLACK, 16, 0);
+	lcd_show_float_num(130, 100, tempVol, 4, RED, BLACK, 16);
+	lcd_show_string(10, 120, "Current:", RED, BLACK, 16, 0);
+	lcd_show_float_num(130, 120, tempCur, 4, RED, BLACK, 16);
+	lcd_show_string(10, 140, "Light:", RED, BLACK, 16, 0);
+	lcd_show_int_num(130, 140, tempLt, 4, RED, BLACK, 16);
+	lcd_show_string(10, 160, "Potentiometer:", RED, BLACK, 16, 0);
+	lcd_show_int_num(130, 160, tempPt, 4, RED, BLACK,
+			16);
+	lcd_show_string(10, 180, "Temperature:", RED, BLACK, 16, 0);
+	lcd_show_float_num(130, 180, tempT, 4, RED, BLACK,
+			16);
+}
 void f_slave_init_def(void)
 {
 	_slave_signal_def = 0;
@@ -162,7 +182,9 @@ void f_slave_behavior_def(void)
 	{
 		_f_read_data_def();
 		if(_f_is_flag_def()){
-			_slave_state_def = STATE_COMMAND_PARSER;
+			if(rx_buf[0] == _address_def || rx_buf[0] == 0xFF){
+				_slave_state_def = STATE_COMMAND_PARSER;
+			}
 		}
 		break;
 	}
