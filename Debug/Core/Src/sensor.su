@@ -1,0 +1,7 @@
+../Core/Src/sensor.c:15:6:sensor_init	8	static
+../Core/Src/sensor.c:19:6:sensor_read	8	static
+../Core/Src/sensor.c:23:10:sensor_get_light	4	static
+../Core/Src/sensor.c:27:10:sensor_get_potentiometer	4	static
+../Core/Src/sensor.c:31:7:sensor_get_voltage	8	static
+../Core/Src/sensor.c:35:7:sensor_get_current	8	static
+../Core/Src/sensor.c:40:7:sensor_get_temperature	4	static
