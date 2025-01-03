@@ -23,6 +23,11 @@ void f_rs485_fsm();
 
 void RS485_UART_Callback(UART_HandleTypeDef *huart);
 
+uint8_t _is_frame_status();
+uint8_t _is_character_received();
+uint8_t _is_transmit();
+uint8_t _crc_checking();
+
 void _f_init_rs485_super_init();
 void _f_rs485_super_init();
 void _f_init_rs485_init();

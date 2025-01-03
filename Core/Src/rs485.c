@@ -27,14 +27,71 @@ enum frame_status_t
 	FRAME_NOT_OK
 };
 
-UART_HandleTypeDef *_huart;
-uint8_t *receive_buffer;
-uint8_t *flag_rx;
-uint8_t *rx_size;
-uint8_t receive_index = 0;
+UART_HandleTypeDef *_huart_callback;
+uint8_t *_receive_buffer_callback;
+uint8_t *_flag_rx_callback;
+uint16_t *_rx_size_callback;
 
-uint8_t transmit_buffer[256] = {0x00};
-uint8_t transmit_size = 0;
+uint8_t _receive_byte_buffer = 0;
+uint8_t _receive_buffer[256] = {0x00};
+uint8_t _receive_index = 0;
+
+uint8_t _transmit_buffer[256] = {0x00};
+uint8_t _transmit_size = 0;
+
+enum frame_status_t FRAME_STATUS = FRAME_NOT_OK;
+uint8_t _frame_size = 0;
+uint8_t _isCRCChecking = 0;
+
+enum modbus485_state_t MODBUS485_STATE = RS485_SUPER_INIT;
+uint8_t _character_received_flag = 0;
+uint8_t _transmit_flag = 0;
+
+uint8_t _is_frame_status()
+{
+	if (FRAME_STATUS == FRAME_OK)
+	{
+		FRAME_STATUS = FRAME_NOT_OK;
+		return 1;
+	}
+	return 0;
+}
+
+uint8_t _is_character_received()
+{
+	if (_character_received_flag == 1)
+	{
+		_character_received_flag = 0;
+		return 1;
+	}
+	return 0;
+}
+
+uint8_t _is_transmit()
+{
+	if (_transmit_flag == 1)
+	{
+		_transmit_flag = 0;
+		return 1;
+	}
+	return 0;
+}
+
+uint8_t _crc_checking()
+{
+	if (_receive_index - 2 >= 0)
+	{
+		uint16_t crc = crc16(_receive_buffer, _receive_index - 2);
+		uint8_t crc_high = (crc >> 8) & 0xFF;
+		uint8_t crc_low = crc & 0xFF;
+		if (crc_low == _receive_buffer[_receive_index - 2] && crc_high == _receive_buffer[_receive_index - 1])
+		{
+			return 1;
+		}
+	}
+
+	return 0;
+}
 
 /*
  * @brief Initialize values for variable include: huart channel, receive_buffer
@@ -47,7 +104,10 @@ uint8_t transmit_size = 0;
  */
 void f_rs485_init(UART_HandleTypeDef *huart, uint8_t *receive_buffer, uint8_t *flag_rx, uint16_t *rx_size)
 {
-
+	_huart_callback = huart;
+	_receive_buffer_callback = receive_buffer;
+	_flag_rx_callback = flag_rx;
+	_rx_size_callback = rx_size;
 }
 
 /*
@@ -58,7 +118,21 @@ void f_rs485_init(UART_HandleTypeDef *huart, uint8_t *receive_buffer, uint8_t *f
  */
 void f_rs485_send_cmd(uint8_t *tx_buffer_without_crc, uint8_t tx_size_without_crc)
 {
+	if (tx_size_without_crc > 254) return;
 
+	for (int i = 0; i < tx_size_without_crc; i++)
+	{
+		_transmit_buffer[i] = tx_buffer_without_crc[i];
+	}
+	//	sprintf((void*)transmit_buffer,"%s",cmd_without_crc);
+	_transmit_size = tx_size_without_crc;
+
+	uint16_t crc = crc16(_transmit_buffer, _transmit_size);
+	_transmit_buffer[_transmit_size] = (uint8_t)(crc & 0x00FF); // CRC low
+	_transmit_buffer[_transmit_size + 1] = (uint8_t)((crc >> 8) & 0x00FF); // CRC high
+
+	_transmit_size += 2;
+	_transmit_flag = 1;
 }
 
 void f_rs485_fsm_init()
@@ -90,7 +164,7 @@ void f_rs485_fsm()
 				_f_init_rs485_idle();
 				MODBUS485_STATE = RS485_IDLE;
 			}
-			if (is_character_received()) // CHANGE STATE -> RS485_INIT
+			if (_is_character_received()) // CHANGE STATE -> RS485_INIT
 			{
 				_f_init_rs485_init();
 				MODBUS485_STATE = RS485_INIT;
@@ -99,15 +173,15 @@ void f_rs485_fsm()
 		case RS485_IDLE:
 			_f_rs485_idle();
 
-			if (is_transmit()) // CHANGE STATE -> RS485_TRANSMIT
+			if (_is_transmit()) // CHANGE STATE -> RS485_TRANSMIT
 			{
-				HAL_GPIO_WritePin(RS485_EN_GPIO_Port, RS485_EN_Pin, 1);
-				HAL_UART_Transmit(&huart3, transmit_buffer, transmit_size, HAL_MAX_DELAY);
-				HAL_GPIO_WritePin(RS485_EN_GPIO_Port, RS485_EN_Pin, 0);
+				HAL_GPIO_WritePin(EN_RS485_GPIO_Port, EN_RS485_Pin, 1);
+				HAL_UART_Transmit(_huart_callback, _transmit_buffer, _transmit_size, HAL_MAX_DELAY);
+				HAL_GPIO_WritePin(EN_RS485_GPIO_Port, EN_RS485_Pin, 0);
 				_f_init_rs485_transmit();
 				MODBUS485_STATE = RS485_TRANSMIT;
 			}
-			if (is_character_received()) // CHANGE STATE -> RS485_RECEIVE
+			if (_is_character_received()) // CHANGE STATE -> RS485_RECEIVE
 			{
 				_f_init_rs485_receive();
 				MODBUS485_STATE = RS485_RECEIVE;
@@ -125,7 +199,7 @@ void f_rs485_fsm()
 		case RS485_RECEIVE:
 			_f_rs485_receive();
 
-			if (is_character_received()) // CHANGE STATE -> RS485_RECEIVE
+			if (_is_character_received()) // CHANGE STATE -> RS485_RECEIVE
 			{
 				_f_init_rs485_receive();
 				MODBUS485_STATE = RS485_RECEIVE;
@@ -152,65 +226,95 @@ void f_rs485_fsm()
 
 void _f_init_rs485_super_init()
 {
-
+	// Do not thing
 }
 
 void _f_rs485_super_init()
 {
-
+	// Do not thing
 }
 
 void _f_init_rs485_init()
 {
-
+	setTimer(TI_RS485_T35_TIMER, TI_RS485_T35_TIME);
 }
 
 void _f_rs485_init()
 {
-
+	// Do not thing
 }
 
 void _f_init_rs485_idle()
 {
-
+	_transmit_flag = 0;
+	_receive_index = 0;
 }
 
 void _f_rs485_idle()
 {
-
+	// Do not thing
 }
 
 void _f_init_rs485_transmit()
 {
-
+	setTimer(TI_RS485_T35_TIMER, TI_RS485_T35_TIME);
 }
 
 void _f_rs485_transmit()
 {
-
+	// Do not thing
 }
 
 void _f_init_rs485_receive()
 {
-
+	setTimer(TI_RS485_T35_TIMER, TI_RS485_T35_TIME);
+	setTimer(TI_RS485_T15_TIMER, TI_RS485_T15_TIME);
 }
 
 void _f_rs485_receive()
 {
-
+	// Do not thing
 }
 
 void _f_init_rs485_waiting_control()
 {
-
+	_isCRCChecking = 0;
 }
 
 void _f_rs485_waiting_control()
 {
+	if (_is_character_received())
+	{
+		FRAME_STATUS = FRAME_NOT_OK;
+	}
 
+	if (_isCRCChecking == 0)
+	{
+		// CHECK SLAVE ADDRESS if needed
+		if (_crc_checking())
+		{
+			FRAME_STATUS = FRAME_OK;
+		}
+		else
+		{
+			FRAME_STATUS = FRAME_NOT_OK;
+		}
+		_frame_size = _receive_index;
+		_isCRCChecking = 1;
+	}
 }
 
 void RS485_UART_Callback(UART_HandleTypeDef *huart)
 {
+	if (huart == _huart_callback)
+	{
+		_receive_buffer[_receive_index++] = _receive_byte_buffer;
+		_character_received_flag = 1;
 
+		// DEBUG
+		HAL_UART_Transmit(&huart1, &_receive_byte_buffer, 1, HAL_MAX_DELAY);
+		// END DEBUG
+
+		HAL_UART_Receive_IT(_huart_callback, &_receive_byte_buffer, 1);
+	}
 }
