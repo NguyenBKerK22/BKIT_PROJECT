@@ -144,6 +144,7 @@ void f_master_fsm(){
 			}
 			break;
 		case PROCESSING_REPLY:
+		{
 			uint8_t _address;
 			uint8_t _function;
 			uint8_t _data[256];
@@ -153,12 +154,14 @@ void f_master_fsm(){
 			if(_crc_receive == crc16(master.rx_buf, master.rx_size - 2)){
 				switch(_function){
 					case READ_HOLDING_REGISTER:
+					{
 						uint8_t _num_bytes = master.rx_buf[2];
 						uint16_t _address = (((uint16_t)master.tx_buf[2]<<8)|(master.tx_buf[3]));
 						for(int i=0;i<_num_bytes;i++){
 							master.holding_register[i + _address]  = master.rx_buf[i+3];
 						}
 						break;
+					}
 					case WRITE_MULTIPLE_HOLDING_REGISTER:
 						break;
 					case WRITE_SINGLE_COIL:
@@ -172,6 +175,7 @@ void f_master_fsm(){
 				master_behavior = PROCESSING_ERROR;
 			}
 			break;
+		}
 		case PROCESSING_ERROR:
 			error_count++;
 			if(error_count == 5){

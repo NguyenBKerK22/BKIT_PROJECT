@@ -45,7 +45,7 @@ uint8_t transmit_size = 0;
  * @param rx_size: the size of receive command for callback fsm
  * @retval: None
  */
-void f_rs485_init(UART_HandleTypeDef *huart, uint8_t *receive_buffer, uint8_t *flag_rx, uint8_t *rx_size)
+void f_rs485_init(UART_HandleTypeDef *huart, uint8_t *receive_buffer, uint8_t *flag_rx, uint16_t *rx_size)
 {
 
 }
