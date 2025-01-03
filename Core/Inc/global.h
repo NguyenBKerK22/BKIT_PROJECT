@@ -20,23 +20,4 @@
 #define TI_MASTER_TURN_ARROUND_TIME 50
 #define TI_MASTER_WAITING_TIMER 6
 #define TI_MASTER_WAITING_TIME 100
-
-#define READ_TEMPERATURE 0x01
-#define READ_CURRENT 0x02
-#define READ_VOLTAGE 0x03
-#define READ_LIGHT 0x04
-#define READ_LED 0x05
-#define READ_POTENTION 0x06
-#define WRITE_TEMPERATURE 0x07
-#define WRITE_CURRENT 0x08
-#define WRITE_VOLTAGE 0x09
-#define WRITE_LIGHT 0x0A
-#define WRITE_POTENTION 0x0B
-#define BROAD_CAST 0xFF
-
-extern uint8_t slave_address;
-extern uint8_t cmd_send;
-extern uint8_t flag_send_cmd;
-extern uint8_t flag_slave_not_respond;
-extern uint8_t flag_master_is_idle;
 #endif /* INC_GLOBAL_H_ */

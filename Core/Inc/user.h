@@ -7,7 +7,7 @@
 
 #ifndef INC_USER_H_
 #define INC_USER_H_
-#include "global.h"
+#include "master.h"
 #include "button.h"
 #include "lcd.h"
 #include "led_7seg.h"
