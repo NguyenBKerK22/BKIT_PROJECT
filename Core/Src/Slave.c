@@ -40,7 +40,7 @@ static void _f_slave_read_multiple_holding_register_handler_def(void)
 	tx_buf[2] = numberOfReg * 2;
 	int i;
 	for(i = 0; i < numberOfReg * 2; i++){
-		tx_buf[i + 3] = _register_def[startReg];
+		tx_buf[i + 3] = _register_def[startReg + i];
 	}
 	tx_size = i + 3;
 	f_rs485_send_cmd(tx_buf, tx_size);
