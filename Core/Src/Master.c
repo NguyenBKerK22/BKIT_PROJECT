@@ -21,7 +21,7 @@ void _f_master_send_cmd_temperature(){
 	master.tx_buf[2] = 0x00;
 	master.tx_buf[3] = TEMPERATURE_REGISTER_ADDRESS;
 	master.tx_buf[4] = 0x00;
-	master.tx_buf[5] = 0x01;
+	master.tx_buf[5] = 0x02;
 	master.tx_size = 6;
 }
 
@@ -31,7 +31,7 @@ void _f_master_send_cmd_current(){
 	master.tx_buf[2] = 0x00;
 	master.tx_buf[3] = CURRENT_REGISTER_ADDRESS;
 	master.tx_buf[4] = 0x00;
-	master.tx_buf[5] = 0x01;
+	master.tx_buf[5] = 0x02;
 	master.tx_size = 6;
 }
 
@@ -41,7 +41,7 @@ void _f_master_send_cmd_voltage(){
 	master.tx_buf[2] = 0x00;
 	master.tx_buf[3] = VOLTAGE_REGISTER_ADDRESS;
 	master.tx_buf[4] = 0x00;
-	master.tx_buf[5] = 0x01;
+	master.tx_buf[5] = 0x02;
 	master.tx_size = 6;
 }
 
@@ -198,15 +198,15 @@ void f_master_fsm(){
 }
 
 float f_master_get_temperature(){
-	return *((float*)((master.holding_register + TEMPERATURE_REGISTER_ADDRESS)));
+	return *((float*)(master.holding_register + TEMPERATURE_REGISTER_ADDRESS));
 }
 
 float f_master_get_current(){
-	return *((float*)((master.holding_register + CURRENT_REGISTER_ADDRESS)));;
+	return *((float*)(master.holding_register + CURRENT_REGISTER_ADDRESS));
 }
 
 float f_master_get_voltage(){
-	return *((float*)((master.holding_register + VOLTAGE_REGISTER_ADDRESS)));
+	return *((float*)(master.holding_register + VOLTAGE_REGISTER_ADDRESS));
 }
 
 uint16_t f_master_get_light(){
