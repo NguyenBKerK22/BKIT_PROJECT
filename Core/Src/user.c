@@ -48,29 +48,41 @@ void f_user_interface(){
 			}
 			if(isPress(1)){
 				cmd_send = READ_POTENTION;
+				flag_send_cmd = 1;
 			}
 			if(isPress(2)){
 				cmd_send = READ_POTENTION;
+				flag_send_cmd = 1;
 			}
 			if(isPress(3)){
 				cmd_send = READ_LIGHT;
+				flag_send_cmd = 1;
 			}
 			if(isPress(5)){
 				cmd_send = READ_TEMPERATURE;
+				flag_send_cmd = 1;
 			}
 			if(isPress(6)){
 				cmd_send = READ_CURRENT;
+				flag_send_cmd = 1;
 			}
 			if(isPress(7)){
 				cmd_send = READ_VOLTAGE;
+				flag_send_cmd = 1;
 			}
 			if(isPress(9)){
 				cmd_send = READ_LED;
+				flag_send_cmd = 1;
 			}
 			if(isPress(10)){
 				cmd_send = WRITE_LIGHT;
+				flag_send_cmd = 1;
 			}
-			if(cmd_send != 0x00) flag_send_cmd = 1;
+			if(isPress(8)){
+				cmd_send = 0x00;
+				user_state = SEND_PERIOD;
+				break;
+			}
 			break;
 		case SEND_PERIOD:
 			if(flag_master_is_idle == 1){
@@ -79,6 +91,11 @@ void f_user_interface(){
 				if(cmd_send >= 0x0B){
 					cmd_send = 0x01;
 				}
+			}
+			if(isPress(8)){
+				cmd_send = 0x00;
+				user_state = SEND_MANUAL;
+				break;
 			}
 			break;
 		default:
