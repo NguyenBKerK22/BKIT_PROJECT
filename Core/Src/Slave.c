@@ -145,18 +145,17 @@ static uint8_t _f_is_flag_def(void){
 /*PUBLIC FUNCTION START DEFINE-----------------------------------------------------------------------------------------------------------*/
 void f_display_slave_value_def(void)
 {
-	lcd_show_string(10, 100, "Voltage:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 100, tempVol, 4, RED, BLACK, 16);
+	lcd_show_string(10, 100, "Temperature:", RED, BLACK, 16, 0);
+	lcd_show_float_num(130, 100, tempT, 4, RED, BLACK, 16);
 	lcd_show_string(10, 120, "Current:", RED, BLACK, 16, 0);
 	lcd_show_float_num(130, 120, tempCur, 4, RED, BLACK, 16);
-	lcd_show_string(10, 140, "Light:", RED, BLACK, 16, 0);
-	lcd_show_int_num(130, 140, tempLt, 4, RED, BLACK, 16);
-	lcd_show_string(10, 160, "Potentiometer:", RED, BLACK, 16, 0);
-	lcd_show_int_num(130, 160, tempPt, 4, RED, BLACK,
-			16);
-	lcd_show_string(10, 180, "Temperature:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 180, tempT, 4, RED, BLACK,
-			16);
+	lcd_show_string(10, 140, "Voltage:", RED, BLACK, 16, 0);
+	lcd_show_float_num(130, 140, tempVol, 4, RED, BLACK, 16);
+	lcd_show_string(10, 160, "Light:", RED, BLACK, 16, 0);
+	lcd_show_int_num(130, 160, tempLt, 4, RED, BLACK, 16);
+	lcd_show_string(10, 180, "Potentiometer:", RED, BLACK, 16, 0);
+	lcd_show_int_num(130, 180, tempPt, 4, RED, BLACK,16);
+
 }
 void f_slave_init_def(void)
 {

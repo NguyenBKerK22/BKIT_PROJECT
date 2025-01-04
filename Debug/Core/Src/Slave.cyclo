@@ -7,5 +7,5 @@
 ../Core/Src/Slave.c:116:13:_f_read_data_def	1
 ../Core/Src/Slave.c:135:16:_f_is_flag_def	2
 ../Core/Src/Slave.c:146:6:f_display_slave_value_def	1
-../Core/Src/Slave.c:161:6:f_slave_init_def	1
-../Core/Src/Slave.c:170:6:f_slave_behavior_def	10
+../Core/Src/Slave.c:160:6:f_slave_init_def	1
+../Core/Src/Slave.c:169:6:f_slave_behavior_def	10

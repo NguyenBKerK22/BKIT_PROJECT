@@ -5519,182 +5519,181 @@ LOAD C:/ST/STM32CubeIDE_1.14.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x0000000008000de0                _f_splituint16_def
  *fill*         0x0000000008000e0e        0x2 
  .text._f_slave_read_multiple_holding_register_handler_def
-                0x0000000008000e10       0xb4 ./Core/Src/Slave.o
+                0x0000000008000e10       0xb8 ./Core/Src/Slave.o
  .text._f_slave_read_holding_register_handler_def
-                0x0000000008000ec4        0xe ./Core/Src/Slave.o
- *fill*         0x0000000008000ed2        0x2 
+                0x0000000008000ec8        0xe ./Core/Src/Slave.o
+ *fill*         0x0000000008000ed6        0x2 
  .text._f_slave_write_holding_register_handler_def
-                0x0000000008000ed4       0x34 ./Core/Src/Slave.o
+                0x0000000008000ed8       0x34 ./Core/Src/Slave.o
  .text._f_slave_commandparser_handler_def
-                0x0000000008000f08       0x80 ./Core/Src/Slave.o
+                0x0000000008000f0c       0x80 ./Core/Src/Slave.o
  .text._f_read_data_def
-                0x0000000008000f88       0xc8 ./Core/Src/Slave.o
+                0x0000000008000f8c       0xc8 ./Core/Src/Slave.o
  .text._f_is_flag_def
-                0x0000000008001050       0x28 ./Core/Src/Slave.o
+                0x0000000008001054       0x28 ./Core/Src/Slave.o
  .text.f_display_slave_value_def
-                0x0000000008001078      0x150 ./Core/Src/Slave.o
-                0x0000000008001078                f_display_slave_value_def
+                0x000000000800107c      0x150 ./Core/Src/Slave.o
+                0x000000000800107c                f_display_slave_value_def
  .text.f_slave_init_def
-                0x00000000080011c8       0x50 ./Core/Src/Slave.o
-                0x00000000080011c8                f_slave_init_def
+                0x00000000080011cc       0x50 ./Core/Src/Slave.o
+                0x00000000080011cc                f_slave_init_def
  .text.f_slave_behavior_def
-                0x0000000008001218       0xa0 ./Core/Src/Slave.o
-                0x0000000008001218                f_slave_behavior_def
+                0x000000000800121c       0xa0 ./Core/Src/Slave.o
+                0x000000000800121c                f_slave_behavior_def
  .text.MX_ADC1_Init
-                0x00000000080012b8      0x104 ./Core/Src/adc.o
-                0x00000000080012b8                MX_ADC1_Init
+                0x00000000080012bc      0x104 ./Core/Src/adc.o
+                0x00000000080012bc                MX_ADC1_Init
  .text.HAL_ADC_MspInit
-                0x00000000080013bc      0x128 ./Core/Src/adc.o
-                0x00000000080013bc                HAL_ADC_MspInit
+                0x00000000080013c0      0x128 ./Core/Src/adc.o
+                0x00000000080013c0                HAL_ADC_MspInit
  .text.button_scan
-                0x00000000080014e4      0x1d8 ./Core/Src/button.o
-                0x00000000080014e4                button_scan
- .text.crc16    0x00000000080016bc       0x60 ./Core/Src/crc16.o
-                0x00000000080016bc                crc16
+                0x00000000080014e8      0x1d8 ./Core/Src/button.o
+                0x00000000080014e8                button_scan
+ .text.crc16    0x00000000080016c0       0x60 ./Core/Src/crc16.o
+                0x00000000080016c0                crc16
  .text.MX_DMA_Init
-                0x000000000800171c       0x40 ./Core/Src/dma.o
-                0x000000000800171c                MX_DMA_Init
+                0x0000000008001720       0x40 ./Core/Src/dma.o
+                0x0000000008001720                MX_DMA_Init
  .text.MX_FSMC_Init
-                0x000000000800175c       0xf4 ./Core/Src/fsmc.o
-                0x000000000800175c                MX_FSMC_Init
+                0x0000000008001760       0xf4 ./Core/Src/fsmc.o
+                0x0000000008001760                MX_FSMC_Init
  .text.HAL_FSMC_MspInit
-                0x0000000008001850       0x98 ./Core/Src/fsmc.o
+                0x0000000008001854       0x98 ./Core/Src/fsmc.o
  .text.HAL_SRAM_MspInit
-                0x00000000080018e8       0x14 ./Core/Src/fsmc.o
-                0x00000000080018e8                HAL_SRAM_MspInit
+                0x00000000080018ec       0x14 ./Core/Src/fsmc.o
+                0x00000000080018ec                HAL_SRAM_MspInit
  .text.MX_GPIO_Init
-                0x00000000080018fc      0x1c0 ./Core/Src/gpio.o
-                0x00000000080018fc                MX_GPIO_Init
+                0x0000000008001900      0x1c0 ./Core/Src/gpio.o
+                0x0000000008001900                MX_GPIO_Init
  .text.LCD_WR_REG
-                0x0000000008001abc       0x20 ./Core/Src/lcd.o
-                0x0000000008001abc                LCD_WR_REG
+                0x0000000008001ac0       0x20 ./Core/Src/lcd.o
+                0x0000000008001ac0                LCD_WR_REG
  .text.LCD_WR_DATA
-                0x0000000008001adc       0x20 ./Core/Src/lcd.o
+                0x0000000008001ae0       0x20 ./Core/Src/lcd.o
  .text.LCD_RD_DATA
-                0x0000000008001afc       0x24 ./Core/Src/lcd.o
+                0x0000000008001b00       0x24 ./Core/Src/lcd.o
  .text.lcd_set_address
-                0x0000000008001b20       0x98 ./Core/Src/lcd.o
-                0x0000000008001b20                lcd_set_address
+                0x0000000008001b24       0x98 ./Core/Src/lcd.o
+                0x0000000008001b24                lcd_set_address
  .text.lcd_clear
-                0x0000000008001bb8       0x64 ./Core/Src/lcd.o
-                0x0000000008001bb8                lcd_clear
+                0x0000000008001bbc       0x64 ./Core/Src/lcd.o
+                0x0000000008001bbc                lcd_clear
  .text.lcd_draw_point
-                0x0000000008001c1c       0x2e ./Core/Src/lcd.o
-                0x0000000008001c1c                lcd_draw_point
- *fill*         0x0000000008001c4a        0x2 
+                0x0000000008001c20       0x2e ./Core/Src/lcd.o
+                0x0000000008001c20                lcd_draw_point
+ *fill*         0x0000000008001c4e        0x2 
  .text.lcd_show_char
-                0x0000000008001c4c      0x1a0 ./Core/Src/lcd.o
-                0x0000000008001c4c                lcd_show_char
- .text.mypow    0x0000000008001dec       0x38 ./Core/Src/lcd.o
+                0x0000000008001c50      0x1a0 ./Core/Src/lcd.o
+                0x0000000008001c50                lcd_show_char
+ .text.mypow    0x0000000008001df0       0x38 ./Core/Src/lcd.o
  .text.lcd_show_int_num
-                0x0000000008001e24       0xfc ./Core/Src/lcd.o
-                0x0000000008001e24                lcd_show_int_num
+                0x0000000008001e28       0xfc ./Core/Src/lcd.o
+                0x0000000008001e28                lcd_show_int_num
  .text.lcd_show_float_num
-                0x0000000008001f20      0x110 ./Core/Src/lcd.o
-                0x0000000008001f20                lcd_show_float_num
+                0x0000000008001f24      0x110 ./Core/Src/lcd.o
+                0x0000000008001f24                lcd_show_float_num
  .text.lcd_set_direction
-                0x0000000008002030       0x48 ./Core/Src/lcd.o
-                0x0000000008002030                lcd_set_direction
+                0x0000000008002034       0x48 ./Core/Src/lcd.o
+                0x0000000008002034                lcd_set_direction
  .text.lcd_init
-                0x0000000008002078      0x2c0 ./Core/Src/lcd.o
-                0x0000000008002078                lcd_init
+                0x000000000800207c      0x2c0 ./Core/Src/lcd.o
+                0x000000000800207c                lcd_init
  .text.lcd_show_string
-                0x0000000008002338       0xc8 ./Core/Src/lcd.o
-                0x0000000008002338                lcd_show_string
+                0x000000000800233c       0xc8 ./Core/Src/lcd.o
+                0x000000000800233c                lcd_show_string
  .text.HAL_TIM_PeriodElapsedCallback
-                0x0000000008002400       0x24 ./Core/Src/main.o
-                0x0000000008002400                HAL_TIM_PeriodElapsedCallback
+                0x0000000008002404       0x24 ./Core/Src/main.o
+                0x0000000008002404                HAL_TIM_PeriodElapsedCallback
  .text.HAL_UART_RxCpltCallback
-                0x0000000008002424       0x16 ./Core/Src/main.o
-                0x0000000008002424                HAL_UART_RxCpltCallback
- *fill*         0x000000000800243a        0x2 
- .text.main     0x000000000800243c       0xac ./Core/Src/main.o
-                0x000000000800243c                main
+                0x0000000008002428       0x16 ./Core/Src/main.o
+                0x0000000008002428                HAL_UART_RxCpltCallback
+ *fill*         0x000000000800243e        0x2 
+ .text.main     0x0000000008002440       0xac ./Core/Src/main.o
+                0x0000000008002440                main
  .text.SystemClock_Config
-                0x00000000080024e8       0xd4 ./Core/Src/main.o
-                0x00000000080024e8                SystemClock_Config
+                0x00000000080024ec       0xd4 ./Core/Src/main.o
+                0x00000000080024ec                SystemClock_Config
  .text.Error_Handler
-                0x00000000080025bc        0xa ./Core/Src/main.o
-                0x00000000080025bc                Error_Handler
- *fill*         0x00000000080025c6        0x2 
+                0x00000000080025c0        0xa ./Core/Src/main.o
+                0x00000000080025c0                Error_Handler
+ *fill*         0x00000000080025ca        0x2 
  .text.uart_Rs232SendString
-                0x00000000080025c8       0x38 ./Core/Src/rs485.o
-                0x00000000080025c8                uart_Rs232SendString
+                0x00000000080025cc       0x38 ./Core/Src/rs485.o
+                0x00000000080025cc                uart_Rs232SendString
  .text._is_character_received
-                0x0000000008002600       0x28 ./Core/Src/rs485.o
-                0x0000000008002600                _is_character_received
+                0x0000000008002604       0x28 ./Core/Src/rs485.o
+                0x0000000008002604                _is_character_received
  .text._is_transmit
-                0x0000000008002628       0x28 ./Core/Src/rs485.o
-                0x0000000008002628                _is_transmit
+                0x000000000800262c       0x28 ./Core/Src/rs485.o
+                0x000000000800262c                _is_transmit
  .text._crc_checking
-                0x0000000008002650       0x68 ./Core/Src/rs485.o
-                0x0000000008002650                _crc_checking
+                0x0000000008002654       0x68 ./Core/Src/rs485.o
+                0x0000000008002654                _crc_checking
  .text.f_rs485_init
-                0x00000000080026b8       0x44 ./Core/Src/rs485.o
-                0x00000000080026b8                f_rs485_init
+                0x00000000080026bc       0x44 ./Core/Src/rs485.o
+                0x00000000080026bc                f_rs485_init
  .text.f_rs485_send_cmd
-                0x00000000080026fc       0x98 ./Core/Src/rs485.o
-                0x00000000080026fc                f_rs485_send_cmd
+                0x0000000008002700       0x98 ./Core/Src/rs485.o
+                0x0000000008002700                f_rs485_send_cmd
  .text.f_rs485_fsm_init
-                0x0000000008002794       0x34 ./Core/Src/rs485.o
-                0x0000000008002794                f_rs485_fsm_init
+                0x0000000008002798       0x34 ./Core/Src/rs485.o
+                0x0000000008002798                f_rs485_fsm_init
  .text.f_rs485_fsm
-                0x00000000080027c8      0x1d0 ./Core/Src/rs485.o
-                0x00000000080027c8                f_rs485_fsm
+                0x00000000080027cc      0x1d0 ./Core/Src/rs485.o
+                0x00000000080027cc                f_rs485_fsm
  .text._f_rs485_super_init
-                0x0000000008002998        0xe ./Core/Src/rs485.o
-                0x0000000008002998                _f_rs485_super_init
- *fill*         0x00000000080029a6        0x2 
+                0x000000000800299c        0xe ./Core/Src/rs485.o
+                0x000000000800299c                _f_rs485_super_init
+ *fill*         0x00000000080029aa        0x2 
  .text._f_init_rs485_init
-                0x00000000080029a8       0x1c ./Core/Src/rs485.o
-                0x00000000080029a8                _f_init_rs485_init
+                0x00000000080029ac       0x1c ./Core/Src/rs485.o
+                0x00000000080029ac                _f_init_rs485_init
  .text._f_rs485_init
-                0x00000000080029c4        0xe ./Core/Src/rs485.o
-                0x00000000080029c4                _f_rs485_init
- *fill*         0x00000000080029d2        0x2 
+                0x00000000080029c8        0xe ./Core/Src/rs485.o
+                0x00000000080029c8                _f_rs485_init
+ *fill*         0x00000000080029d6        0x2 
  .text._f_init_rs485_idle
-                0x00000000080029d4       0x28 ./Core/Src/rs485.o
-                0x00000000080029d4                _f_init_rs485_idle
+                0x00000000080029d8       0x28 ./Core/Src/rs485.o
+                0x00000000080029d8                _f_init_rs485_idle
  .text._f_rs485_idle
-                0x00000000080029fc        0xe ./Core/Src/rs485.o
-                0x00000000080029fc                _f_rs485_idle
- *fill*         0x0000000008002a0a        0x2 
+                0x0000000008002a00        0xe ./Core/Src/rs485.o
+                0x0000000008002a00                _f_rs485_idle
+ *fill*         0x0000000008002a0e        0x2 
  .text._f_init_rs485_transmit
-                0x0000000008002a0c       0x1c ./Core/Src/rs485.o
-                0x0000000008002a0c                _f_init_rs485_transmit
+                0x0000000008002a10       0x1c ./Core/Src/rs485.o
+                0x0000000008002a10                _f_init_rs485_transmit
  .text._f_rs485_transmit
-                0x0000000008002a28        0xe ./Core/Src/rs485.o
-                0x0000000008002a28                _f_rs485_transmit
- *fill*         0x0000000008002a36        0x2 
+                0x0000000008002a2c        0xe ./Core/Src/rs485.o
+                0x0000000008002a2c                _f_rs485_transmit
+ *fill*         0x0000000008002a3a        0x2 
  .text._f_init_rs485_receive
-                0x0000000008002a38       0x24 ./Core/Src/rs485.o
-                0x0000000008002a38                _f_init_rs485_receive
+                0x0000000008002a3c       0x24 ./Core/Src/rs485.o
+                0x0000000008002a3c                _f_init_rs485_receive
  .text._f_rs485_receive
-                0x0000000008002a5c        0xe ./Core/Src/rs485.o
-                0x0000000008002a5c                _f_rs485_receive
- *fill*         0x0000000008002a6a        0x2 
+                0x0000000008002a60        0xe ./Core/Src/rs485.o
+                0x0000000008002a60                _f_rs485_receive
+ *fill*         0x0000000008002a6e        0x2 
  .text._f_init_rs485_waiting_control
-                0x0000000008002a6c       0x1c ./Core/Src/rs485.o
-                0x0000000008002a6c                _f_init_rs485_waiting_control
+                0x0000000008002a70       0x1c ./Core/Src/rs485.o
+                0x0000000008002a70                _f_init_rs485_waiting_control
  .text._f_rs485_waiting_control
-                0x0000000008002a88       0x58 ./Core/Src/rs485.o
-                0x0000000008002a88                _f_rs485_waiting_control
+                0x0000000008002a8c       0x58 ./Core/Src/rs485.o
+                0x0000000008002a8c                _f_rs485_waiting_control
  .text.RS485_UART_Callback
-                0x0000000008002ae0       0x6c ./Core/Src/rs485.o
-                0x0000000008002ae0                RS485_UART_Callback
+                0x0000000008002ae4       0x6c ./Core/Src/rs485.o
+                0x0000000008002ae4                RS485_UART_Callback
  .text.sensor_init
-                0x0000000008002b4c       0x1c ./Core/Src/sensor.o
-                0x0000000008002b4c                sensor_init
+                0x0000000008002b50       0x1c ./Core/Src/sensor.o
+                0x0000000008002b50                sensor_init
  .text.sensor_read
-                0x0000000008002b68       0x1c ./Core/Src/sensor.o
-                0x0000000008002b68                sensor_read
+                0x0000000008002b6c       0x1c ./Core/Src/sensor.o
+                0x0000000008002b6c                sensor_read
  .text.sensor_get_light
-                0x0000000008002b84       0x18 ./Core/Src/sensor.o
-                0x0000000008002b84                sensor_get_light
+                0x0000000008002b88       0x18 ./Core/Src/sensor.o
+                0x0000000008002b88                sensor_get_light
  .text.sensor_get_potentiometer
-                0x0000000008002b9c       0x18 ./Core/Src/sensor.o
-                0x0000000008002b9c                sensor_get_potentiometer
- *fill*         0x0000000008002bb4        0x4 
+                0x0000000008002ba0       0x18 ./Core/Src/sensor.o
+                0x0000000008002ba0                sensor_get_potentiometer
  .text.sensor_get_voltage
                 0x0000000008002bb8       0x78 ./Core/Src/sensor.o
                 0x0000000008002bb8                sensor_get_voltage
@@ -6179,8 +6178,8 @@ LOAD C:/ST/STM32CubeIDE_1.14.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
 .rodata         0x00000000080081e8     0x3080
                 0x00000000080081e8                . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x00000000080081e8       0x3d ./Core/Src/Slave.o
- *fill*         0x0000000008008225        0x3 
+ .rodata        0x00000000080081e8       0x3f ./Core/Src/Slave.o
+ *fill*         0x0000000008008227        0x1 
  .rodata        0x0000000008008228       0x6a ./Core/Src/rs485.o
  *(.rodata*)
  *fill*         0x0000000008008292        0x2 
