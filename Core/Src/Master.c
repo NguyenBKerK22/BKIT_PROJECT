@@ -104,7 +104,6 @@ void f_master_fsm(){
 			flag_master_is_idle = 1;
 			if(flag_send_cmd){
 				flag_send_cmd = 0;
-				flag_master_is_idle = 0;
 				switch(cmd_send){
 					case READ_TEMPERATURE:
 						_f_master_send_cmd_temperature();

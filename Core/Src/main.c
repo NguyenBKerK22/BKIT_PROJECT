@@ -64,7 +64,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart);
 /* USER CODE BEGIN 0 */
 void TestADC();
 void lcd_run();
-
+void master_led7_seg_init();
+void master_lcd_init();
 /* USER CODE END 0 */
 
 /**
@@ -105,19 +106,10 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-  led_7seg_init();
-  led_7seg_set_colon(1);
-  led_7seg_debug_turn_off(6);
-  led_7seg_debug_turn_off(7);
-  led_7seg_debug_turn_off(8);
-  led_7seg_set_digit(0, 0, 0 );
-  led_7seg_set_digit(0, 1, 0 );
-  led_7seg_set_digit(0, 2, 0 );
-  led_7seg_set_digit(0, 3, 0 );
-  lcd_init();
+  master_led7_seg_init();
+  master_lcd_init();
   sensor_init();
   f_rs485_fsm_init();
-  lcd_clear(BLACK);
   HAL_TIM_Base_Start_IT(&htim3);
   setTimer(TI_BUTTON_SCAN_TIMER, TI_BUTTON_SCAN_TIME);
   setTimer(TI_7SEG_SCAN_TIMER, TI_7SEG_SCAN_TIME);
@@ -214,18 +206,41 @@ void TestADC() {
 	}
 }
 void lcd_run(){
-	lcd_show_string(10, 100, "Temperature:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 100, f_master_get_temperature(), 4, RED, BLACK, 16);
-	lcd_show_string(10, 120, "Current:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 120, f_master_get_current(), 4, RED, BLACK, 16);
-	lcd_show_string(10, 140, "Voltage:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 140, f_master_get_voltage(), 4, RED, BLACK, 16);
-	lcd_show_string(10, 160, "Light:", RED, BLACK, 16, 0);
-	lcd_show_int_num(130, 160, f_master_get_light(), 4, RED, BLACK, 16);
-	lcd_show_string(10, 180, "Potentiometer:", RED, BLACK, 16, 0);
-	lcd_show_int_num(130, 180, f_master_get_potention(), 4, RED, BLACK,16);
+	lcd_show_string(10, 60, "Temperature:", RED, BLACK, 16, 0);
+	lcd_show_float_num(130, 60, f_master_get_temperature(), 4, RED, BLACK, 16);
+	lcd_show_string(10, 80, "Current:", RED, BLACK, 16, 0);
+	lcd_show_float_num(130, 80, f_master_get_current(), 4, RED, BLACK, 16);
+	lcd_show_string(10, 100, "Voltage:", RED, BLACK, 16, 0);
+	lcd_show_float_num(130, 100, f_master_get_voltage(), 4, RED, BLACK, 16);
+	lcd_show_string(10, 120, "Light:", RED, BLACK, 16, 0);
+	lcd_show_int_num(130, 120, f_master_get_light(), 4, RED, BLACK, 16);
+	lcd_show_string(10, 140, "Potentiometer:", RED, BLACK, 16, 0);
+	lcd_show_int_num(130, 140, f_master_get_potention(), 4, RED, BLACK,16);
 }
-
+void master_led7_seg_init(){
+	led_7seg_init();
+	led_7seg_set_colon(1);
+	led_7seg_debug_turn_off(6);
+	led_7seg_debug_turn_off(7);
+	led_7seg_debug_turn_off(8);
+	led_7seg_set_digit(0, 0, 0 );
+	led_7seg_set_digit(0, 1, 0 );
+	led_7seg_set_digit(0, 2, 0 );
+	led_7seg_set_digit(0, 3, 0 );
+}
+void master_lcd_init(){
+	lcd_init();
+	lcd_clear(BLACK);
+	lcd_show_string(60, 5, "MASTER: 0x11", RED, BLACK, 24, 0);
+	lcd_draw_rectangle(0, 30, 240, 160, RED);
+	lcd_draw_rectangle(0, 170, 240, 250, RED);
+	lcd_draw_rectangle(0, 250, 240, 320, RED);
+	lcd_show_string(10, 40, "DATA:", RED, BLACK, 16, 0);
+	lcd_show_string(10, 180, "COMMAND:", RED, BLACK, 16, 0);
+	lcd_show_string(10, 260, "SLAVE NOT RESPOND:", RED, BLACK, 16, 0);
+	lcd_show_string(10, 200, "Button 1: Set Address", RED, BLACK, 16, 0);
+	lcd_show_string(10, 220, "Button 4: Set colon", RED, BLACK, 16, 0);
+}
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim->Instance == TIM3){

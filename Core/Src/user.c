@@ -9,9 +9,7 @@ enum user_behavior_t user_state = INIT;
 uint8_t led_7seg_colon_index = 0;
 void f_user_interface(){
 	if(flag_slave_not_respond == 1){
-		char _buf[22];
-		sprintf(_buf,"Slave %d not respond", slave_address);
-		lcd_show_string(10, 200, _buf, RED, BLACK, 16, 0);
+//		lcd_show_string(10, 270, _buf, RED, BLACK, 16, 0);
 	}
 	switch(user_state){
 		case INIT:
