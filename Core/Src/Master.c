@@ -159,6 +159,32 @@ void f_master_fsm(){
 					for(int i=0;i<_num_bytes;i++){
 						master.holding_register[i + _address]  = master.rx_buf[i+3];
 					}
+					switch(_address){
+						case POTENTIOMETER_REGISTER_ADDRESS:
+							lcd_show_string(10, 140, "Potentiometer:", RED, BLACK, 16, 0);
+							lcd_show_int_num(150, 140, f_master_get_potention(), 5, RED, BLACK,16);
+							break;
+						case LED_REGISTER_ADDRESS:
+							break;
+						case LIGHT_REGISTER_ADDRESS:
+							lcd_show_string(10, 120, "Light:", RED, BLACK, 16, 0);
+							lcd_show_int_num(150, 120, f_master_get_light(), 5, RED, BLACK, 16);
+							break;
+						case TEMPERATURE_REGISTER_ADDRESS:
+							lcd_show_string(10, 60, "Temperature:", RED, BLACK, 16, 0);
+							lcd_show_float_num(130, 60, f_master_get_temperature(), 4, RED, BLACK, 16);
+							break;
+						case CURRENT_REGISTER_ADDRESS:
+							lcd_show_string(10, 80, "Current:", RED, BLACK, 16, 0);
+							lcd_show_float_num(130, 80, f_master_get_current(), 4, RED, BLACK, 16);
+							break;
+						case VOLTAGE_REGISTER_ADDRESS:
+							lcd_show_string(10, 100, "Voltage:", RED, BLACK, 16, 0);
+							lcd_show_float_num(130, 100, f_master_get_voltage(), 4, RED, BLACK, 16);
+							break;
+						default:
+							break;
+					}
 					break;
 				}
 				case WRITE_MULTIPLE_HOLDING_REGISTER:
@@ -177,6 +203,37 @@ void f_master_fsm(){
 			if(error_count >= 5){
 				flag_slave_not_respond = 1;
 				flag_send_cmd = 0;
+				uint16_t _num_bytes = (((uint16_t)master.tx_buf[4]<<8)|(master.tx_buf[5]))*2;
+				uint16_t _address = (((uint16_t)master.tx_buf[2]<<8)|(master.tx_buf[3]));
+				for(int i=0;i<_num_bytes;i++){
+					master.holding_register[i + _address]  = 0xFF;
+				}
+				switch(_address){
+					case POTENTIOMETER_REGISTER_ADDRESS:
+						lcd_show_string(10, 140, "Potentiometer:", RED, BLACK, 16, 0);
+						lcd_show_int_num(150, 140, -1, 5, RED, BLACK,16);
+						break;
+					case LED_REGISTER_ADDRESS:
+						break;
+					case LIGHT_REGISTER_ADDRESS:
+						lcd_show_string(10, 120, "Light:", RED, BLACK, 16, 0);
+						lcd_show_int_num(150, 120, -1, 5, RED, BLACK, 16);
+						break;
+					case TEMPERATURE_REGISTER_ADDRESS:
+						lcd_show_string(10, 60, "Temperature:", RED, BLACK, 16, 0);
+						lcd_show_float_num(130, 60, -1, 4, RED, BLACK, 16);
+						break;
+					case CURRENT_REGISTER_ADDRESS:
+						lcd_show_string(10, 80, "Current:", RED, BLACK, 16, 0);
+						lcd_show_float_num(130, 80, -1, 4, RED, BLACK, 16);
+						break;
+					case VOLTAGE_REGISTER_ADDRESS:
+						lcd_show_string(10, 100, "Voltage:", RED, BLACK, 16, 0);
+						lcd_show_float_num(130, 100, -1, 4, RED, BLACK, 16);
+						break;
+					default:
+						break;
+				}
 				master_behavior = IDLE;
 				break;
 			}

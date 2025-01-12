@@ -235,7 +235,7 @@ uint32_t mypow(uint8_t m, uint8_t n) {
 }
 
 void lcd_show_int_num(uint16_t x, uint16_t y, uint16_t num, uint8_t len,
-		uint16_t fc, uint16_t bc, uint8_t sizey) {
+	uint16_t fc, uint16_t bc, uint8_t sizey) {
 	uint8_t t, temp;
 	uint8_t enshow = 0;
 	uint8_t sizex = sizey / 2;
@@ -253,8 +253,7 @@ void lcd_show_int_num(uint16_t x, uint16_t y, uint16_t num, uint8_t len,
 	}
 }
 
-void lcd_show_float_num(uint16_t x, uint16_t y, float num, uint8_t len,
-		uint16_t fc, uint16_t bc, uint8_t sizey) {
+void lcd_show_float_num(uint16_t x, uint16_t y, float num, uint8_t len, uint16_t fc, uint16_t bc, uint8_t sizey) {
 	uint8_t t, temp, sizex;
 	uint16_t num1;
 	sizex = sizey / 2;

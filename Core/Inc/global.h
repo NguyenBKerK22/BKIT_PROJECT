@@ -9,6 +9,7 @@
 #define INC_GLOBAL_H_
 #include "stdint.h"
 #include "timer.h"
+#include "lcd.h"
 #define BAUDRATE 9600
 #define TI_BUTTON_SCAN_TIMER 0
 #define TI_BUTTON_SCAN_TIME 20

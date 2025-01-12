@@ -131,7 +131,6 @@ int main(void)
 		  led_7seg_display();
 		  setTimer(TI_7SEG_SCAN_TIMER, TI_7SEG_SCAN_TIME);
 	  }
-	  lcd_run();
 	  f_user_interface();
 	  f_rs485_fsm();
 	  f_master_fsm();
@@ -205,18 +204,6 @@ void TestADC() {
 				16);
 	}
 }
-void lcd_run(){
-	lcd_show_string(10, 60, "Temperature:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 60, f_master_get_temperature(), 4, RED, BLACK, 16);
-	lcd_show_string(10, 80, "Current:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 80, f_master_get_current(), 4, RED, BLACK, 16);
-	lcd_show_string(10, 100, "Voltage:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 100, f_master_get_voltage(), 4, RED, BLACK, 16);
-	lcd_show_string(10, 120, "Light:", RED, BLACK, 16, 0);
-	lcd_show_int_num(130, 120, f_master_get_light(), 4, RED, BLACK, 16);
-	lcd_show_string(10, 140, "Potentiometer:", RED, BLACK, 16, 0);
-	lcd_show_int_num(130, 140, f_master_get_potention(), 4, RED, BLACK,16);
-}
 void master_led7_seg_init(){
 	led_7seg_init();
 	led_7seg_set_colon(1);
@@ -240,6 +227,16 @@ void master_lcd_init(){
 	lcd_show_string(10, 260, "SLAVE NOT RESPOND:", RED, BLACK, 16, 0);
 	lcd_show_string(10, 200, "Button 1: Set Address", RED, BLACK, 16, 0);
 	lcd_show_string(10, 220, "Button 4: Set colon", RED, BLACK, 16, 0);
+	lcd_show_string(10, 60, "Temperature:", RED, BLACK, 16, 0);
+	lcd_show_float_num(130, 60, 0, 4, RED, BLACK, 16);
+	lcd_show_string(10, 80, "Current:", RED, BLACK, 16, 0);
+	lcd_show_float_num(130, 80, 0, 4, RED, BLACK, 16);
+	lcd_show_string(10, 100, "Voltage:", RED, BLACK, 16, 0);
+	lcd_show_float_num(130, 100, 0, 4, RED, BLACK, 16);
+	lcd_show_string(10, 120, "Light:", RED, BLACK, 16, 0);
+	lcd_show_int_num(150, 120, 0, 5, RED, BLACK, 16);
+	lcd_show_string(10, 140, "Potentiometer:", RED, BLACK, 16, 0);
+	lcd_show_int_num(150, 140, 0, 5, RED, BLACK,16);
 }
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
