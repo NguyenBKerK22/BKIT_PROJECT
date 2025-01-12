@@ -100,4 +100,8 @@ void lcd_show_string(uint16_t x, uint16_t y, char *str, uint16_t fc, uint16_t bc
 		uint8_t sizey, uint8_t mode);
 void lcd_show_string_center(uint16_t x, uint16_t y, char *str, uint16_t fc, uint16_t bc,
 		uint8_t sizey, uint8_t mode);
+void lcd_show_negative_int_num(uint16_t x, uint16_t y, uint16_t num, uint8_t len,
+	uint16_t fc, uint16_t bc, uint8_t sizey);
+void lcd_show_negative_float_num(uint16_t x, uint16_t y, float num, uint8_t len, uint16_t fc, uint16_t bc, uint8_t sizey);
+void lcd_clear_from_x_y(uint16_t x, uint16_t y, uint8_t len, uint16_t fc, uint16_t bc, uint8_t sizey);
 #endif /* INC_LCD_H_ */

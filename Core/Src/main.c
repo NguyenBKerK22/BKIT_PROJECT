@@ -228,15 +228,15 @@ void master_lcd_init(){
 	lcd_show_string(10, 200, "Button 1: Set Address", RED, BLACK, 16, 0);
 	lcd_show_string(10, 220, "Button 4: Set colon", RED, BLACK, 16, 0);
 	lcd_show_string(10, 60, "Temperature:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 60, 0, 4, RED, BLACK, 16);
+	lcd_show_float_num(130, 60, 1234, 4, RED, BLACK, 16);
 	lcd_show_string(10, 80, "Current:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 80, 0, 4, RED, BLACK, 16);
+	lcd_show_float_num(130, 80, 1234, 4, RED, BLACK, 16);
 	lcd_show_string(10, 100, "Voltage:", RED, BLACK, 16, 0);
-	lcd_show_float_num(130, 100, 0, 4, RED, BLACK, 16);
+	lcd_show_float_num(130, 100, 1234, 4, RED, BLACK, 16);
 	lcd_show_string(10, 120, "Light:", RED, BLACK, 16, 0);
-	lcd_show_int_num(150, 120, 0, 5, RED, BLACK, 16);
+	lcd_show_int_num(150, 120, 12345, 5, RED, BLACK, 16);
 	lcd_show_string(10, 140, "Potentiometer:", RED, BLACK, 16, 0);
-	lcd_show_int_num(150, 140, 0, 5, RED, BLACK,16);
+	lcd_show_int_num(150, 140, 12345, 5, RED, BLACK,16);
 }
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {

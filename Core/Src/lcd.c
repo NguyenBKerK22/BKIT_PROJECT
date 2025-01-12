@@ -486,3 +486,52 @@ void lcd_show_string_center(uint16_t x, uint16_t y, char *str, uint16_t fc, uint
 	uint16_t x1 = (lcddev.width - len * 8) / 2;
 	lcd_show_string(x + x1, y, str, fc, bc, sizey, mode);
 }
+void lcd_show_negative_int_num(uint16_t x, uint16_t y, uint16_t num, uint8_t len,
+	uint16_t fc, uint16_t bc, uint8_t sizey) {
+	uint8_t t, temp;
+	uint8_t enshow = 0;
+	uint8_t sizex = sizey / 2;
+	uint16_t num1 = num-1;
+	num1 = 0xFFFF - num1;
+	lcd_show_char(x , y, '-', fc, bc, sizey, 0);
+	for (t = 0; t < len; t++) {
+		temp = (num1 / mypow(10, len - t - 1)) % 10;
+		if (enshow == 0 && t < (len - 1)) {
+			if (temp == 0) {
+				continue;
+			} else{
+				enshow++;
+				lcd_show_char(x + (enshow) * sizex, y, temp + 48, fc, bc, sizey, 0);
+				continue;
+			}
+		}
+		enshow++;
+		lcd_show_char(x + (enshow) * sizex, y, temp + 48, fc, bc, sizey, 0);
+	}
+}
+
+void lcd_show_negative_float_num(uint16_t x, uint16_t y, float num, uint8_t len, uint16_t fc, uint16_t bc, uint8_t sizey) {
+	uint8_t t, temp, sizex;
+	uint16_t num1;
+	sizex = sizey / 2;
+	num = 0 - num;
+	num1 = num * 100;
+	lcd_show_char(x , y, '-', fc, bc, sizey, 0);
+	for (t = 0; t < len; t++) {
+		temp = (num1 / mypow(10, len - t - 1)) % 10;
+		if (t == (len - 2)) {
+			lcd_show_char(x + (len - 2 + 1) * sizex, y, '.', fc, bc, sizey, 0);
+			t++;
+			len += 1;
+		}
+		lcd_show_char(x + (t + 1)* sizex, y, temp + 48, fc, bc, sizey, 0);
+	}
+}
+void lcd_clear_from_x_y(uint16_t x, uint16_t y, uint8_t len, uint16_t fc, uint16_t bc, uint8_t sizey){
+	uint8_t sizex = sizey/2;
+	uint8_t t;
+	for (t = 0; t < len; t++) {
+		lcd_show_char(x + t* sizex, y, ' ', fc, bc, sizey, 0);
+	}
+}
+
